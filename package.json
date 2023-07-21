@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "react-bootstrap": "^2.8.0",
+    "swiper": "^10.0.4",
+    "typewriter-effect": "^2.20.1"
+  }
+}
