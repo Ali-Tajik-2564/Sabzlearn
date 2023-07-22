@@ -13,6 +13,7 @@ function App() {
   const [token, setToken] = useState(null);
   const [userInfo, setUserINfo] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
+
   const login = useCallback((userInfo, token) => {
     setToken(token);
     setUserINfo(userInfo);
@@ -26,16 +27,18 @@ function App() {
   }, []);
   useEffect(() => {
     const localStorageData = JSON.parse(localStorage.getItem("user"));
+    console.log("localStorageDate", localStorageData);
     if (localStorageData) {
       fetch("http://localhost:4000/v1/auth/me", {
         headers: {
-          Authorization: `Bearer ${localStorageData.token}`,
+          Authorization: `Bearer ${localStorageData}`,
         },
       })
         .then((res) => res.json())
         .then((userData) => {
           setIsLoggedIn(true);
           setUserINfo(userData);
+          console.log(isLoggedIn);
         });
     }
   }, [login]);
