@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, json } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
 import MainHeader from "../../Components/MainHeader/MainHeader";
@@ -13,10 +13,11 @@ import {
   emailValidator,
   phoneNumberValidator,
 } from "../../Validator/rules";
-
+import AuthContext from "../../Context/AuthContext";
 import "./Register.css";
 
 export default function Register() {
+  const authContext = useContext(AuthContext);
   const [formState, onInputHandler] = useForm(
     {
       name: {
@@ -62,6 +63,7 @@ export default function Register() {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
+        authContext.login(result.user, result.accessToken);
       });
   };
 
