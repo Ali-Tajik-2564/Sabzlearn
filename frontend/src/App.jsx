@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import { useRoutes } from "react-router-dom";
 import routes from "./router";
@@ -9,21 +9,36 @@ import "./style/variables.css";
 import "./style/defaults.css";
 import AuthContext from "./Context/AuthContext";
 function App() {
+  const router = useRoutes(routes);
   const [token, setToken] = useState(null);
   const [userInfo, setUserINfo] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
-  const login = (userInfo, token) => {
+  const login = useCallback((userInfo, token) => {
     setToken(token);
     setUserINfo(userInfo);
     setIsLoggedIn(true);
     localStorage.setItem("user", JSON.stringify(token));
-  };
-  const logout = () => {
+  }, []);
+  const logout = useCallback(() => {
     setToken(null);
     setUserINfo(null);
     localStorage.removeItem("user");
-  };
-  const router = useRoutes(routes);
+  }, []);
+  useEffect(() => {
+    const localStorageData = JSON.parse(localStorage.getItem("user"));
+    if (localStorageData) {
+      fetch("http://localhost:4000/v1/auth/me", {
+        headers: {
+          Authorization: `Bearer ${localStorageData.token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((userData) => {
+          setIsLoggedIn(true);
+          setUserINfo(userData);
+        });
+    }
+  }, [login]);
   return (
     <AuthContext.Provider
       value={{
