@@ -1,7 +1,12 @@
 import React from "react";
 import "./MainHeader.css";
+import AuthContext from "../../Context/AuthContext";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 export default function MainHeader() {
+  const authContext = useContext(AuthContext);
+  console.log(authContext);
   return (
     <div>
       <div class='main-header'>
@@ -143,11 +148,17 @@ export default function MainHeader() {
               <a href='#' class='main-header__cart-btn'>
                 <i class='fas fa-shopping-cart main-header__cart-icon'></i>
               </a>
-              <a href='#' class='main-header__profile'>
-                <span class='main-header__profile-text'>
-                  محمدامین سعیدی راد
-                </span>
-              </a>
+              {authContext.isLoggedIn ? (
+                <Link to='#' class='main-header__profile'>
+                  <span class='main-header__profile-text'>
+                    {authContext.userInfo.name}
+                  </span>
+                </Link>
+              ) : (
+                <Link to='/login' class='main-header__profile'>
+                  <span class='main-header__profile-text'>ثبت نام / ورود</span>
+                </Link>
+              )}
             </div>
           </div>
         </div>
