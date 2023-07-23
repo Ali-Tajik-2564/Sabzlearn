@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
 import MainHeader from "../../Components/MainHeader/MainHeader";
 import Topbar from "../../Components/Topbar/Topbar";
@@ -13,8 +13,12 @@ import {
 import "./Login.css";
 import Input from "../../Components/Form/Input/Input";
 import Button from "../../Components/Form/Buuton/Button";
+import AuthContext from "../../Context/AuthContext";
+import swal from "sweetalert";
 
 export default function Login() {
+  const navigate = useNavigate();
+  const authContext = useContext(AuthContext);
   const [formState, onInputHandler] = useForm(
     {
       username: {
@@ -51,9 +55,21 @@ export default function Login() {
       })
       .then((result) => {
         console.log(result);
+        authContext.login({}, result.accessToken);
+        swal({
+          title: "ورود شما با موفقیت انجام شد",
+          icon: "success",
+          button: " حله منو ببر به صفحه اصلی",
+        }).then((value) => {
+          navigate("/");
+        });
       })
       .catch((err) => {
-        alert("همجین کاربری موجود نیست");
+        swal({
+          title: "همجین کاربری یافت نشد",
+          icon: "error",
+          button: " تلاش دوباره",
+        });
       });
   };
   return (
