@@ -34,20 +34,24 @@ export default function MainHeader() {
                   <li class='main-header__item' key={menu.id}>
                     <Link to={menu.href} class='main-header__link'>
                       {menu.title}
-                      <i class='fas fa-angle-down main-header__link-icon'></i>
-                      <ul class='main-header__dropdown'>
-                        {menu.submenus.map((submenu) => (
-                          <li
-                            class='main-header__dropdown-item'
-                            key={submenu.id}>
-                            <Link
-                              to={submenu.href}
-                              class='main-header__dropdown-link'>
-                              {submenu.title}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+                      {menu.submenus.length !== 0 && (
+                        <>
+                          <i class='fas fa-angle-down main-header__link-icon'></i>
+                          <ul class='main-header__dropdown'>
+                            {menu.submenus.map((submenu) => (
+                              <li
+                                class='main-header__dropdown-item'
+                                key={submenu.id}>
+                                <Link
+                                  to={submenu.href}
+                                  class='main-header__dropdown-link'>
+                                  {submenu.title}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </>
+                      )}
                     </Link>
                   </li>
                 ))}
