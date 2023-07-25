@@ -15,7 +15,6 @@ export default function CourseInfo() {
   console.log(token);
   useEffect(() => {
     fetch(`http://localhost:4000/v1/courses/${courseName}`, {
-      method: "POST",
       headers: {
         Authorization: `Bearer ${token}}`,
       },
