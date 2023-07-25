@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./CourseInfo.css";
 import TopBar from "./../../Components/TopBar/TopBar";
 import MainHeader from "./../../Components/MainHeader/MainHeader";
@@ -7,7 +7,22 @@ import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 import CourseInfoBox from "../../Components/CourseInfoBox/CourseInfoBox";
 import Comment from "../../Components/Comment/Comment";
 import Accordion from "react-bootstrap/Accordion";
+import { useParams } from "react-router-dom";
 export default function CourseInfo() {
+  const { courseName } = useParams();
+  console.log(courseName);
+  const token = JSON.parse(localStorage.getItem("user"));
+  console.log(token);
+  useEffect(() => {
+    fetch(`http://localhost:4000/v1/courses/${courseName}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((courseData) => console.log(courseData));
+  }, []);
   return (
     <div>
       <TopBar />
