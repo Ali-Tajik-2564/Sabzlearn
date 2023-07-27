@@ -267,7 +267,7 @@ export default function CourseInfo() {
               </div>
 
               {/* <!-- Finish Teacher Details --> */}
-              <Comment />
+              <Comment comments={comments} />
             </div>
             <div class='col-4'>
               <div class='courses-info'>
