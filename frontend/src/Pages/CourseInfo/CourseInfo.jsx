@@ -11,8 +11,7 @@ import { useParams } from "react-router-dom";
 export default function CourseInfo() {
   const { courseName } = useParams();
   console.log(courseName);
-  const token = JSON.parse(localStorage.getItem("user"));
-  console.log(token);
+  const LocalStorageToken = JSON.parse(localStorage.getItem("user"));
   const [sessions, setSessions] = useState([]);
   const [comments, setComments] = useState([]);
   const [courseDetail, setCourseDetail] = useState({});
@@ -21,7 +20,9 @@ export default function CourseInfo() {
   useEffect(() => {
     fetch(`http://localhost:4000/v1/courses/${courseName}`, {
       headers: {
-        Authorization: `Bearer ${token}}`,
+        Authorization: `Bearer ${
+          LocalStorageToken === null ? null : LocalStorageToken
+        }}`,
       },
     })
       .then((res) => res.json())

@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+
 import "./Comment.css";
+import AuthContext from "../../Context/AuthContext";
+import { Link } from "react-router-dom";
 export default function Comment({ comments }) {
   console.log(comments);
+  const authContext = useContext(AuthContext);
+  console.log(authContext);
   return (
     <div class='comments'>
       <div class='comments__header'>
@@ -75,45 +80,56 @@ export default function Comment({ comments }) {
           </>
         )}
       </div>
-
-      <div class='comments__rules'>
-        <span class='comments__rules-title'>قوانین ثبت دیدگاه</span>
-        <span class='comments__rules-item'>
-          <i class='fas fa-check comments__rules-icon'></i>
-          اگر نیاز به پشتیبانی دوره دارید از قسمت پرسش سوال در قسمت نمایش انلاین
-          استفاده نمایید و سوالات مربوط به رفع اشکال تایید نخواهند شد
-        </span>
-        <span class='comments__rules-item'>
-          <i class='fas fa-check comments__rules-icon'></i>
-          دیدگاه های نامرتبط به دوره تایید نخواهد شد.
-        </span>
-        <span class='comments__rules-item'>
-          <i class='fas fa-check comments__rules-icon'></i>
-          سوالات مرتبط با رفع اشکال در این بخش تایید نخواهد شد.
-        </span>
-        <span class='comments__rules-item'>
-          <i class='fas fa-check comments__rules-icon'></i>
-          از درج دیدگاه های تکراری پرهیز نمایید.
-        </span>
-      </div>
-      <div class='comments__respond'>
-        <div class='comments__score'>
-          <span class='comments__score-title'>امتیاز شما</span>
-          <div class='comments__score-input'>
-            <span class='comments__score-input-text'>
-              امتیاز خود را انتخاب کنید
-            </span>
-            <i class='fas fa-angle-down	 comments__input-icon'></i>
+      {
+        (authContext.isLoggedIn = true ? (
+          <div className='alert alert-danger m-3'>
+            برای ثبت دیدگاه لطفا اول وارد شوید
           </div>
-        </div>
-        <div class='comments__respond-content'>
-          <div class='comments__respond-title'>دیدگاه شما *</div>
-          <textarea class='comments__score-input-respond'></textarea>
-        </div>
-        <button type='submit' class='comments__respond-btn'>
-          ارسال
-        </button>
-      </div>
+        ) : (
+          <>
+            <div class='comments__rules'>
+              <span class='comments__rules-title'>قوانین ثبت دیدگاه</span>
+              <span class='comments__rules-item'>
+                <i class='fas fa-check comments__rules-icon'></i>
+                اگر نیاز به پشتیبانی دوره دارید از قسمت پرسش سوال در قسمت نمایش
+                انلاین استفاده نمایید و سوالات مربوط به رفع اشکال تایید نخواهند
+                شد
+              </span>
+              <span class='comments__rules-item'>
+                <i class='fas fa-check comments__rules-icon'></i>
+                دیدگاه های نامرتبط به دوره تایید نخواهد شد.
+              </span>
+              <span class='comments__rules-item'>
+                <i class='fas fa-check comments__rules-icon'></i>
+                سوالات مرتبط با رفع اشکال در این بخش تایید نخواهد شد.
+              </span>
+              <span class='comments__rules-item'>
+                <i class='fas fa-check comments__rules-icon'></i>
+                از درج دیدگاه های تکراری پرهیز نمایید.
+              </span>
+            </div>{" "}
+            <div class='comments__respond'>
+              <div class='comments__score'>
+                <span class='comments__score-title'>امتیاز شما</span>
+                <div class='comments__score-input'>
+                  <span class='comments__score-input-text'>
+                    امتیاز خود را انتخاب کنید
+                    <Link to='/login'> ثبت نام / وارد شدن</Link>
+                  </span>
+                  <i class='fas fa-angle-down	 comments__input-icon'></i>
+                </div>
+              </div>
+              <div class='comments__respond-content'>
+                <div class='comments__respond-title'>دیدگاه شما *</div>
+                <textarea class='comments__score-input-respond'></textarea>
+              </div>
+              <button type='submit' class='comments__respond-btn'>
+                ارسال
+              </button>
+            </div>
+          </>
+        ))
+      }
     </div>
   );
 }
