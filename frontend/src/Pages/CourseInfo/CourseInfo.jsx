@@ -22,7 +22,7 @@ export default function CourseInfo() {
     fetch(`http://localhost:4000/v1/courses/${courseName}`, {
       headers: {
         Authorization: `Bearer ${
-          LocalStorageToken === null ? null : LocalStorageToken
+          LocalStorageToken === "" ? null : LocalStorageToken
         }}`,
       },
     })
@@ -40,16 +40,16 @@ export default function CourseInfo() {
     fetch("http://localhost:4000/v1/comments", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${LocalStorageToken}`,
         "Content-Type": "application/json",
+        Authorization: `Bearer ${LocalStorageToken}`,
       },
-      body: {
+      body: JSON.stringify({
         body: enteredComment,
         courseShortName: courseName,
         score: 5,
-      },
+      }),
     })
-      .then((res) => res.json())
+      .then((res) => console.log(res))
       .then((result) => {
         console.log(result);
         swal({

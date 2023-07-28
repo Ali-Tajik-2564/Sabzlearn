@@ -22,7 +22,7 @@ function App() {
   }, []);
   const logout = useCallback(() => {
     setToken(null);
-    setUserINfo(null);
+    setUserInfo(null);
     localStorage.removeItem("user");
   }, []);
   useEffect(() => {

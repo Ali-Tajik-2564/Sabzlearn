@@ -4,14 +4,14 @@ import "./Comment.css";
 import AuthContext from "../../Context/AuthContext";
 import { Link } from "react-router-dom";
 export default function Comment({ comments, onSubmit }) {
-  console.log(comments);
   const authContext = useContext(AuthContext);
-  console.log(authContext);
   const [enteredComment, setEnteredComment] = useState("");
 
   const commentChangeHandler = (event) => {
     setEnteredComment(event.target.value);
   };
+  console.log(comments);
+  console.log(authContext);
   return (
     <div class='comments'>
       <div class='comments__header'>
@@ -89,6 +89,7 @@ export default function Comment({ comments, onSubmit }) {
         (authContext.isLoggedIn = false ? (
           <div className='alert alert-danger m-3'>
             برای ثبت دیدگاه لطفا اول وارد شوید
+            <Link to='/login'> ثبت نام / وارد شدن</Link>
           </div>
         ) : (
           <>
@@ -119,7 +120,6 @@ export default function Comment({ comments, onSubmit }) {
                 <div class='comments__score-input'>
                   <span class='comments__score-input-text'>
                     امتیاز خود را انتخاب کنید
-                    <Link to='/login'> ثبت نام / وارد شدن</Link>
                   </span>
                   <i class='fas fa-angle-down	 comments__input-icon'></i>
                 </div>

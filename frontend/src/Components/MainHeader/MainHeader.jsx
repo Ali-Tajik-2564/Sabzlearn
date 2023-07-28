@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default function MainHeader() {
   const [allMenus, setAllMenus] = useState([]);
   const authContext = useContext(AuthContext);
-  console.log(authContext);
+  console.log("authContext", authContext);
   useEffect(() => {
     fetch("http://localhost:4000/v1/menus")
       .then((res) => res.json())
