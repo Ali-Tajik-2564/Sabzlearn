@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./LastCourses.css";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import CourseBox from "../CourseBox/CourseBox";
 
 export default function LastCourses() {
+  const [allCourse, setAllCourse] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:4000/v1/courses")
+      .then((res) => res.json())
+      .then((courses) => setAllCourse(courses));
+  }, []);
   return (
     <div>
       <div class='courses'>
@@ -18,29 +24,11 @@ export default function LastCourses() {
           <div class='courses-content'>
             <div class='container'>
               <div class='row'>
-                <div className='col-4'>
-                  <CourseBox />
-                </div>
-
-                <div className='col-4'>
-                  <CourseBox />
-                </div>
-
-                <div className='col-4'>
-                  <CourseBox />
-                </div>
-
-                <div className='col-4'>
-                  <CourseBox />
-                </div>
-
-                <div className='col-4'>
-                  <CourseBox />
-                </div>
-
-                <div className='col-4'>
-                  <CourseBox />
-                </div>
+                {allCourse.slice(0, 6).map((course) => (
+                  <div className='col-4'>
+                    <CourseBox {...course} />
+                  </div>
+                ))}
               </div>
             </div>
           </div>

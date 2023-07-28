@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "./CourseBox.css";
 import CircleSpinner from "./../CircleSpinner/CircleSpinner";
+import { Link } from "react-router-dom";
 
-export default function CourseBox() {
+export default function CourseBox(props) {
   const [isShowImg, setIsShowImg] = useState(false);
   return (
     <div class='course-box'>
-      <a href='#'>
+      <Link to={`/course-info/${props.shortName}`}>
         <img
           src='/images/courses/fareelancer.png'
           alt='Course img'
@@ -14,17 +15,17 @@ export default function CourseBox() {
           onLoad={() => setIsShowImg(true)}
         />
         {!isShowImg && <CircleSpinner />}
-      </a>
+      </Link>
       <div class='course-box__main'>
-        <a href='#' class='course-box__title'>
-          دوره پروژه محور متخصص جنگو
-        </a>
+        <Link to={`/course-info/${props.shortName}`} class='course-box__title'>
+          {props.name}
+        </Link>
 
         <div class='course-box__rating-teacher'>
           <div class='course-box__teacher'>
             <i class='fas fa-chalkboard-teacher course-box__teacher-icon'></i>
             <a href='#' class='course-box__teacher-link'>
-              رضا دولتی
+              {props.creator}
             </a>
           </div>
           <div class='course-box__rating'>
@@ -61,15 +62,19 @@ export default function CourseBox() {
             <i class='fas fa-users course-box__users-icon'></i>
             <span class='course-box__users-text'>500</span>
           </div>
-          <span class='course-box__price'>1,000,000</span>
+          <span class='course-box__price'>
+            {props.price === 0 ? "رایگان" : props.price}
+          </span>
         </div>
       </div>
 
       <div class='course-box__footer'>
-        <a href='#' class='course-box__footer-link'>
+        <Link
+          to={`/course-info/${props.shortName}`}
+          class='course-box__footer-link'>
           مشاهده اطلاعات
           <i class='fas fa-arrow-left course-box__footer-icon'></i>
-        </a>
+        </Link>
       </div>
     </div>
   );
