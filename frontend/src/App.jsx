@@ -11,12 +11,12 @@ import AuthContext from "./Context/AuthContext";
 function App() {
   const router = useRoutes(routes);
   const [token, setToken] = useState(null);
-  const [userInfo, setUserINfo] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   const login = useCallback((userInfo, token) => {
     setToken(token);
-    setUserINfo(userInfo);
+    setUserInfo(userInfo);
     setIsLoggedIn(true);
     localStorage.setItem("user", JSON.stringify(token));
   }, []);
@@ -37,7 +37,7 @@ function App() {
         .then((res) => res.json())
         .then((userData) => {
           setIsLoggedIn(true);
-          setUserINfo(userData);
+          setUserInfo(userData);
           console.log(isLoggedIn);
         });
     }

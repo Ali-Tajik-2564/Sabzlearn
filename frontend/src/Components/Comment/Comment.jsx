@@ -1,12 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import "./Comment.css";
 import AuthContext from "../../Context/AuthContext";
 import { Link } from "react-router-dom";
-export default function Comment({ comments }) {
+export default function Comment({ comments, onSubmit }) {
   console.log(comments);
   const authContext = useContext(AuthContext);
   console.log(authContext);
+  const [enteredComment, setEnteredComment] = useState("");
+
+  const commentChangeHandler = (event) => {
+    setEnteredComment(event.target.value);
+  };
   return (
     <div class='comments'>
       <div class='comments__header'>
@@ -81,7 +86,7 @@ export default function Comment({ comments }) {
         )}
       </div>
       {
-        (authContext.isLoggedIn = true ? (
+        (authContext.isLoggedIn = false ? (
           <div className='alert alert-danger m-3'>
             برای ثبت دیدگاه لطفا اول وارد شوید
           </div>
@@ -121,9 +126,16 @@ export default function Comment({ comments }) {
               </div>
               <div class='comments__respond-content'>
                 <div class='comments__respond-title'>دیدگاه شما *</div>
-                <textarea class='comments__score-input-respond'></textarea>
+                <textarea
+                  class='comments__score-input-respond'
+                  onChange={commentChangeHandler}>
+                  {enteredComment}
+                </textarea>
               </div>
-              <button type='submit' class='comments__respond-btn'>
+              <button
+                type='submit'
+                class='comments__respond-btn'
+                onClick={() => onSubmit(enteredComment)}>
                 ارسال
               </button>
             </div>

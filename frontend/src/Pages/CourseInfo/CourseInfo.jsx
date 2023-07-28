@@ -8,6 +8,7 @@ import CourseInfoBox from "../../Components/CourseInfoBox/CourseInfoBox";
 import Comment from "../../Components/Comment/Comment";
 import Accordion from "react-bootstrap/Accordion";
 import { useParams } from "react-router-dom";
+import swal from "sweetalert";
 export default function CourseInfo() {
   const { courseName } = useParams();
   console.log(courseName);
@@ -35,6 +36,29 @@ export default function CourseInfo() {
         console.log(courseData);
       });
   }, []);
+  const onSubmitHandler = (enteredComment) => {
+    fetch("http://localhost:4000/v1/comments", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${LocalStorageToken}`,
+        "Content-Type": "application/json",
+      },
+      body: {
+        body: enteredComment,
+        courseShortName: courseName,
+        score: 5,
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        swal({
+          title: "کامنت مورد نظر با موفقیت ثبت شد",
+          button: "تایید",
+          icon: "success",
+        });
+      });
+  };
   return (
     <div>
       <TopBar />
@@ -268,7 +292,7 @@ export default function CourseInfo() {
               </div>
 
               {/* <!-- Finish Teacher Details --> */}
-              <Comment comments={comments} />
+              <Comment comments={comments} onSubmit={onSubmitHandler} />
             </div>
             <div class='col-4'>
               <div class='courses-info'>
