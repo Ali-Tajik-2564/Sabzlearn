@@ -71,11 +71,19 @@ export default function Category() {
           <div class='courses-content'>
             <div class='container'>
               <div class='row'>
-                {allCourses.map((course) => (
-                  <div className='col-4'>
-                    <CourseBox {...course} />
+                {allCourses.length === 0 ? (
+                  <div className='alert alert-warning m-3'>
+                    هنوز هیج دوره ای برای این دسته بندی وجود ندارد
                   </div>
-                ))}
+                ) : (
+                  <>
+                    {allCourses.map((course) => (
+                      <div className='col-4'>
+                        <CourseBox {...course} />
+                      </div>
+                    ))}
+                  </>
+                )}
               </div>
             </div>
           </div>
