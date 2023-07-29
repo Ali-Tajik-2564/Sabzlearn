@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Courses.css";
 import CourseBox from "./../../Components/CourseBox/CourseBox";
 import TopBar from "../../Components/TopBar/TopBar";
@@ -6,6 +6,12 @@ import MainHeader from "../../Components/MainHeader/MainHeader";
 import Footer from "../../Components/Footer/Footer";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 export default function Courses() {
+  const [courses, setCourses] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:4000/v1/courses")
+      .then((res) => res.json())
+      .then((coursesData) => setCourses(coursesData));
+  }, []);
   return (
     <>
       <TopBar />
@@ -70,27 +76,11 @@ export default function Courses() {
           <div class='courses-content'>
             <div class='container'>
               <div class='row'>
-                <div className='col-4'>
-                  <CourseBox />
-                </div>
-                <div className='col-4'>
-                  <CourseBox />
-                </div>
-                <div className='col-4'>
-                  <CourseBox />
-                </div>
-                <div className='col-4'>
-                  <CourseBox />
-                </div>
-                <div className='col-4'>
-                  <CourseBox />
-                </div>
-                <div className='col-4'>
-                  <CourseBox />
-                </div>
-                <div className='col-4'>
-                  <CourseBox />
-                </div>
+                {courses.map((course) => (
+                  <div className='col-4'>
+                    <CourseBox {...course} />
+                  </div>
+                ))}
               </div>
             </div>
           </div>

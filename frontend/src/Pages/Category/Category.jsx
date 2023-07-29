@@ -13,7 +13,7 @@ export default function Category() {
     fetch(`http://localhost:4000/v1/courses/category/${categoryName}`)
       .then((res) => res.json())
       .then((result) => setAllCourses(result));
-  }, []);
+  }, [categoryName]);
   return (
     <div>
       <TopBar />
