@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./TopBar.css";
 export default function TopBar() {
@@ -9,10 +9,10 @@ export default function TopBar() {
       .then((data) => setAllTopBarLinks(data));
   }, []);
 
-  const RandomTopBarLinks = (arr, linksCount) => {
+  const RandomTopBarLinks = useCallback((arr, linksCount) => {
     let shuffle = [...arr].sort(() => 0.5 - Math.random());
     return shuffle.slice(0, linksCount);
-  };
+  });
   return (
     <div>
       <div class='top-bar'>
@@ -22,7 +22,9 @@ export default function TopBar() {
               <ul class='top-bar__menu'>
                 {RandomTopBarLinks(allTopBartLink, 5).map((link) => (
                   <li class='top-bar__item'>
-                    <Link to={link.href} class='top-bar__link'>
+                    <Link
+                      to={`/course-info/${link.href}`}
+                      class='top-bar__link'>
                       {link.title}
                     </Link>
                   </li>

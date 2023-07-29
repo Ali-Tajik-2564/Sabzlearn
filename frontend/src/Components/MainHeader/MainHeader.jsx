@@ -33,7 +33,9 @@ export default function MainHeader() {
                 </li>
                 {allMenus.map((menu) => (
                   <li class='main-header__item' key={menu.id}>
-                    <Link to={menu.href} class='main-header__link'>
+                    <Link
+                      to={`/category/${menu.href}`}
+                      class='main-header__link'>
                       {menu.title}
                       {menu.submenus.length !== 0 && (
                         <>
@@ -44,7 +46,7 @@ export default function MainHeader() {
                                 class='main-header__dropdown-item'
                                 key={submenu.id}>
                                 <Link
-                                  to={submenu.href}
+                                  to={`/${submenu.href}`}
                                   class='main-header__dropdown-link'>
                                   {submenu.title}
                                 </Link>
