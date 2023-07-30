@@ -18,7 +18,7 @@ export default function LastCourses() {
             title='جدیدترین دوره ها'
             desc='سکوی پرتاپ شما به سمت موفقیت'
             BtnTitle='تمامی دوره ها'
-            BtnHref='courses'
+            BtnHref='/courses/1'
           />
 
           <div class='courses-content'>

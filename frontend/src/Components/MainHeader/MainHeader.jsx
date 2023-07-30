@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./MainHeader.css";
 import AuthContext from "../../Context/AuthContext";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function MainHeader() {
   const [allMenus, setAllMenus] = useState([]);
@@ -34,7 +34,7 @@ export default function MainHeader() {
                 {allMenus.map((menu) => (
                   <li class='main-header__item' key={menu.id}>
                     <Link
-                      to={`/category/${menu.href}`}
+                      to={`/category/${menu.href}/1`}
                       class='main-header__link'>
                       {menu.title}
                       {menu.submenus.length !== 0 && (

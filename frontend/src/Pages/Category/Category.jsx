@@ -9,6 +9,7 @@ import { useParams } from "react-router";
 export default function Category() {
   const { categoryName } = useParams();
   const [allCourses, setAllCourses] = useState([]);
+  const [showCourses, setShownCourses] = useState([]);
   useEffect(() => {
     fetch(`http://localhost:4000/v1/courses/category/${categoryName}`)
       .then((res) => res.json())
@@ -77,7 +78,7 @@ export default function Category() {
                   </div>
                 ) : (
                   <>
-                    {allCourses.map((course) => (
+                    {showCourses.map((course) => (
                       <div className='col-4'>
                         <CourseBox {...course} />
                       </div>
@@ -89,7 +90,12 @@ export default function Category() {
           </div>
         </div>
       </section>
-      <Pagination />
+      <Pagination
+        pathname={`/category/${categoryName}`}
+        itemCount={3}
+        items={allCourses}
+        setShownCourses={setShownCourses}
+      />
       <Footer />
     </div>
   );
