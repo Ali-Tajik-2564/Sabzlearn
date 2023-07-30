@@ -5,8 +5,11 @@ import TopBar from "../../Components/TopBar/TopBar";
 import MainHeader from "../../Components/MainHeader/MainHeader";
 import Footer from "../../Components/Footer/Footer";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
+import Pagination from "../../Components/Pagination/Pagination";
 export default function Courses() {
   const [courses, setCourses] = useState([]);
+  const [showCourses, setShownCourses] = useState([]);
+  console.log(showCourses);
   useEffect(() => {
     fetch("http://localhost:4000/v1/courses")
       .then((res) => res.json())
@@ -76,7 +79,7 @@ export default function Courses() {
           <div class='courses-content'>
             <div class='container'>
               <div class='row'>
-                {courses.map((course) => (
+                {showCourses.map((course) => (
                   <div className='col-4'>
                     <CourseBox {...course} />
                   </div>
@@ -84,37 +87,12 @@ export default function Courses() {
               </div>
             </div>
           </div>
-          <div class='courses-pagination'>
-            <ul class='courses__pagination-list'>
-              <li class='courses__pagination-item'>
-                <a href='#' class='courses__pagination-link'>
-                  <i class='fas fa-long-arrow-alt-right courses__pagination-icon'></i>
-                </a>
-              </li>
-              <li class='courses__pagination-item'>
-                <a href='#' class='courses__pagination-link'>
-                  1
-                </a>
-              </li>
-              <li class='courses__pagination-item'>
-                <a href='#' class='courses__pagination-link'>
-                  2
-                </a>
-              </li>
-              <li class='courses__pagination-item'>
-                <a
-                  href='#'
-                  class='courses__pagination-link courses__pagination-link--active'>
-                  3
-                </a>
-              </li>
-              <li class='courses__pagination-item'>
-                <a href='#' class='courses__pagination-link'>
-                  <i class='fas fa-long-arrow-alt-left courses__pagination-icon'></i>
-                </a>
-              </li>
-            </ul>
-          </div>
+          <Pagination
+            pathname='/courses'
+            itemCount={3}
+            items={courses}
+            setShownCourses={setShownCourses}
+          />
         </div>
       </section>
       <Footer />
