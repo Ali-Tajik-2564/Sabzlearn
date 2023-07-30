@@ -46,7 +46,7 @@ export default function MainHeader() {
                                 class='main-header__dropdown-item'
                                 key={submenu.id}>
                                 <Link
-                                  to={`/${submenu.href}`}
+                                  to={`/course-info/${submenu.href}`}
                                   class='main-header__dropdown-link'>
                                   {submenu.title}
                                 </Link>

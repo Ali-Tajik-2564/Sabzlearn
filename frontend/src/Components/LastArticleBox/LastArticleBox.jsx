@@ -1,29 +1,32 @@
 import React from "react";
 import "./LastArticleBox.css";
-export default function LastArticleBox() {
+import { Link } from "react-router-dom";
+export default function LastArticleBox({
+  cover,
+  title,
+  shortName,
+  description,
+}) {
   return (
     // <div class='col-4'>
     <div class='article-card'>
       <div class='article-card__header'>
-        <a href='#' class='article-card__link-img'>
+        <Link to={`article-info/${shortName}`} class='article-card__link-img'>
           <img
-            src='images/blog/1.jpg'
+            src='./images/blog/1.jpg'
             class='article-card__img'
             alt='Article Cover'
           />
-        </a>
+        </Link>
       </div>
       <div class='article-card__content'>
-        <a href='#' class='article-card__link'>
-          نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون
-        </a>
-        <p class='article-card__text'>
-          زبان پایتون هم مانند دیگر زبان­های برنامه نویسی رایج، دارای کتابخانه
-          های مختلفی برای تسریع...
-        </p>
-        <a href='#' class='article-card__btn'>
+        <Link to={`article-info/${shortName}`} class='article-card__link'>
+          {title}
+        </Link>
+        <p class='article-card__text'>{description}</p>
+        <Link to={`article-info/${shortName}`} class='article-card__btn'>
           بیشتر بخوانید
-        </a>
+        </Link>
       </div>
     </div>
     // </div>

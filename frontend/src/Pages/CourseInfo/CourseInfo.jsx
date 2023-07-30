@@ -18,6 +18,7 @@ export default function CourseInfo() {
   const [courseDetail, setCourseDetail] = useState({});
   const [createAt, setCreateAt] = useState("");
   const [updateAt, setUpdateAt] = useState("");
+  const [teacherInfo, setTeacherInfo] = useState("");
   useEffect(() => {
     fetch(`http://localhost:4000/v1/courses/${courseName}`, {
       headers: {
@@ -33,6 +34,7 @@ export default function CourseInfo() {
         setCourseDetail(courseData);
         setCreateAt(courseData.createdAt);
         setUpdateAt(courseData.updatedAt);
+        setTeacherInfo(courseData.creator);
         console.log(courseData);
       });
   }, []);
@@ -59,6 +61,7 @@ export default function CourseInfo() {
         });
       });
   };
+  console.log(teacherInfo);
   return (
     <div>
       <TopBar />
@@ -266,16 +269,16 @@ export default function CourseInfo() {
                 <div class='techer-details__header'>
                   <div class='techer-details__header-right'>
                     <img
-                      src='/images/info/teacher.jfif'
+                      src={teacherInfo.profile}
                       alt='Teacher Profile'
                       class='techer-details__header-img'
                     />
                     <div class='techer-details__header-titles'>
                       <a href='#' class='techer-details__header-link'>
-                        محمدامین سعیدی راد
+                        {teacherInfo.name}
                       </a>
                       <span class='techer-details__header-skill'>
-                        Front End & Back End Developer
+                        {teacherInfo.role}
                       </span>
                     </div>
                   </div>
