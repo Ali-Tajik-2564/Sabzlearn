@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ArticleInfo.css";
 import TopBar from "./../../Components/TopBar/TopBar";
 import MainHeader from "./../../Components/MainHeader/MainHeader";
 import Footer from "./../../Components/Footer/Footer";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 import Comment from "../../Components/Comment/Comment";
+import { useParams } from "react-router";
 export default function ArticleInfo() {
+  const { articleShortName } = useParams();
+  const [articleCreatior, setArticleCreator] = useState(null);
+  useEffect(() => {
+    fetch(`http://localhost:4000/v1/articles/${articleShortName}`)
+      .then((res) => res.json())
+      .then((articleInfo) => {
+        console.log(articleInfo);
+      });
+  });
   return (
     <>
       <TopBar />
@@ -228,7 +238,7 @@ export default function ArticleInfo() {
                 </div>
               </div>
 
-              <Comment />
+              {/* <Comment /> */}
             </div>
             <div class='col-4'>
               <div class='courses-info'>
