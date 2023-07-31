@@ -22,6 +22,7 @@ export default function LastArticles() {
           title='جدیدترین مقاله ها'
           desc='پیش به سوی ارتقای دانش'
           BtnTitle='تمامی مقاله ها'
+          BtnHref='articles/1'
         />
       </div>
       <div class='articles__content'>
