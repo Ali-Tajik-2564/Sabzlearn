@@ -1,13 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState  , memo} from "react";
 import { Link } from "react-router-dom";
 import "./TopBar.css";
-export default function TopBar() {
+export default memo(function TopBar() {
   const [allTopBartLink, setAllTopBarLinks] = useState([]);
   useEffect(() => {
     fetch("http://localhost:4000/v1/menus/topbar")
       .then((res) => res.json())
       .then((data) => setAllTopBarLinks(data));
-  }, []);
+  },[]);
 
   const RandomTopBarLinks = useCallback((arr, linksCount) => {
     let shuffle = [...arr].sort(() => 0.5 - Math.random());
@@ -56,4 +56,4 @@ export default function TopBar() {
       </div>
     </div>
   );
-}
+})

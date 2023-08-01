@@ -14,12 +14,12 @@ function App() {
   const [userInfo, setUserInfo] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
-  const login = useCallback((userInfo, token) => {
+  const login = (userInfo, token) => {
     setToken(token);
     setUserInfo(userInfo);
     setIsLoggedIn(true);
     localStorage.setItem("user", JSON.stringify(token));
-  }, []);
+  }
   const logout = useCallback(() => {
     setToken(null);
     setUserInfo(null);

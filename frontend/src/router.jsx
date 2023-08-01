@@ -6,10 +6,12 @@ import Courses from "./Pages/Courses/Courses";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
 import Articles from "./Pages/Articles/Articles";
+import Contact from "./Pages/Contact/Contact";
 
 const routes = [
   { path: "/", element: <Index /> },
   { path: "/category/:categoryName/:page", element: <Category /> },
+  { path: "/contact", element: <Contact /> },
   { path: "/article-info/:articleName", element: <ArticleInfo /> },
   { path: "/course-info/:courseName", element: <CourseInfo /> },
   { path: "/courses/:page", element: <Courses /> },
