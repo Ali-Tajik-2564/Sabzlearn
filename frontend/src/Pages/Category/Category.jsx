@@ -12,6 +12,7 @@ export default function Category() {
   const [orderedCourses, setOrderedCourses] = useState([]);
   const [status, setStatus] = useState("deafult");
   const [statusTitle, setStatusTitle] = useState(" مرتب سازی پیش فرض");
+  const [searchValue, setSearchValue] = useState("");
   const [showCourses, setShownCourses] = useState([]);
   useEffect(() => {
     fetch(`http://localhost:4000/v1/courses/category/${categoryName}`)
@@ -21,6 +22,7 @@ export default function Category() {
   useEffect(() => {
     switch (status) {
       case "free": {
+        
         let freeCourses = allCourses.filter((course) => course.price === 0);
         setOrderedCourses(freeCourses);
         break;
@@ -39,6 +41,9 @@ export default function Category() {
         setOrderedCourses(firstCourses);
         break;
       }
+      case "deafult" : {
+        setOrderedCourses(allCourses)
+      }
       default: {
         setOrderedCourses(allCourses);
       }
@@ -47,6 +52,11 @@ export default function Category() {
   const statusTitleChangeHandler = (event) => {
     setStatusTitle(event.target.textContent);
   };
+  const searchInputChangeHandler = (event) => {
+    setSearchValue(event.target.value)
+    let filteredCourses = allCourses.filter(course => course.name.includes(event.target.value))
+    setOrderedCourses(filteredCourses)
+  }
   return (
     <div>
       <TopBar />
@@ -67,6 +77,7 @@ export default function Category() {
                   class='courses-top-bar__selection-title'
                   onClick={(event) => {
                     setStatusTitle(" مرتب سازی پیش فرض");
+                    setStatus("deafult")
                     statusTitleChangeHandler(event);
                   }}>
                   {statusTitle}
@@ -131,6 +142,8 @@ export default function Category() {
                   type='text'
                   class='courses-top-bar__input'
                   placeholder='جستجوی دوره ...'
+                  value={searchValue}
+                  onChange={event => searchInputChangeHandler(event)}
                 />
                 <i class='fas fa-search courses-top-bar__search-icon'></i>
               </form>
@@ -139,7 +152,7 @@ export default function Category() {
           <div class='courses-content'>
             <div class='container'>
               <div class='row'>
-                {allCourses.length === 0 ? (
+                {orderedCourses.length === 0 ? (
                   <div className='alert alert-warning m-3'>
                     هنوز هیج دوره ای برای این دسته بندی وجود ندارد
                   </div>
