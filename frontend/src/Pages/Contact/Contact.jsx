@@ -6,6 +6,8 @@ import TopBar from "../../Components/TopBar/TopBar";
 import Input from "../../Components/Form/Input/Input";
 import Button from "../../Components/Form/Buuton/Button";
 import { useForm } from "../../hooks/useForm";
+import swal from "sweetalert";
+import { useNavigate } from 'react-router';
 import {
   requiredValidator,
   minValidator,
@@ -14,6 +16,8 @@ import {
   phoneNumberValidator,
 } from "../../Validator/rules";
 export default function Contact() {
+  const navigate = useNavigate();
+
     const [formState, onInputHandler] = useForm(
         {
           name: {
@@ -35,8 +39,32 @@ export default function Contact() {
         },
         false,
       );
-      const onContactHandler = () => {
-
+      const onContactHandler = (event) => {
+        event.preventDefault()
+        const newContact = {
+          name: formState.inputs.name.value, 
+          email: formState.inputs.email.value,
+          phone: formState.inputs.phone.value, 
+          body: formState.inputs.textarea.value,
+        }
+        fetch("http://localhost:4000/v1/contact" , {
+          method: "POST" ,
+          headers : { "Content-Type" : "application/json"}
+          , body : JSON.stringify(newContact)
+        })
+        .then(res => {
+          res.json()
+          console.log(res);
+          if(res.ok){
+            swal({
+              title: "پیام شما با موفقیت به مدیران سایت ارسال شد",
+              icon: "success",
+              button: " حله منو ببر به صفحه اصلی",
+            }).then((value) => {
+              navigate("/");
+            });
+          }
+        })
       }
   return (
     <>
@@ -120,7 +148,7 @@ export default function Contact() {
                   : "login-form__btn-error"
               }`}
               type='submit'
-              onClick={onContactHandler}
+              onClick={event => onContactHandler(event)}
               disabled={!formState.isFormValid}>
               <i class='login-form__btn-icon fas fa-sign-out-alt'></i>
               <span class='login-form__btn-text'> ثبت نظر</span>

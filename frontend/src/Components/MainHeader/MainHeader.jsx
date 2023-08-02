@@ -12,7 +12,7 @@ export default function MainHeader() {
     fetch("http://localhost:4000/v1/menus")
       .then((res) => res.json())
       .then((data) => setAllMenus(data));
-  }, []);
+  },[]);
   return (
     <div>
       <div class='main-header'>

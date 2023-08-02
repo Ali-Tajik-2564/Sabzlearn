@@ -16,7 +16,7 @@ export default function Articles() {
         console.log(articleData);
         setArticles(articleData);
       });
-  }, []);
+  },[]);
   return (
     <>
       <TopBar />

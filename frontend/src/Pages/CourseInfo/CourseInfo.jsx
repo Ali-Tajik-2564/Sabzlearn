@@ -37,7 +37,7 @@ export default function CourseInfo() {
         setTeacherInfo(courseData.creator);
         console.log(courseData);
       });
-  }, []);
+  },[]);
   const onSubmitHandler = (enteredComment) => {
     fetch("http://localhost:4000/v1/comments", {
       method: "POST",

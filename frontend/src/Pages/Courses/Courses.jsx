@@ -14,7 +14,7 @@ export default function Courses() {
     fetch("http://localhost:4000/v1/courses")
       .then((res) => res.json())
       .then((coursesData) => setCourses(coursesData));
-  }, []);
+  },[]);
   return (
     <>
       <TopBar />
