@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Sidebar.css"
-
+import { Link } from "react-router-dom"
 export default function Sidebar() {
     return (
         <div id="sidebar" class="col-2">
@@ -18,39 +18,39 @@ export default function Sidebar() {
             <div class="sidebar-menu">
                 <ul>
                     <li class="active-menu">
-                        <a href="#">
+                        <Link to="admin-panel">
                             <span>صفحه اصلی</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link to="admin-courses">
                             <span>دوره ها</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link to="menus">
                             <span>منو ها</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link to="admin-articles">
                             <span>مقاله ها</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link to="user">
                             <span>کاربران</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link to="#">
                             <span>کدهای تخفیف</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link to="#">
                             <span>دسته‌بندی‌ها</span>
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>
