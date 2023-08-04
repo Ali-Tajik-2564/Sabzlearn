@@ -8,6 +8,11 @@ import Register from "./Pages/Register/Register";
 import Articles from "./Pages/Articles/Articles";
 import Contact from "./Pages/Contact/Contact";
 import Search from "./Components/Search/Search";
+import AdminIndex from "./Pages/AdminPanel/Index/AdminIndex"
+import Menus from "./Pages/AdminPanel/Menus/Menus"
+import User from "./Pages/AdminPanel/User/User"
+import AdminArticles from "./Pages/AdminPanel/Articles/Articles"
+import AdminCourses from "./Pages/AdminPanel/AdminCourses/AdminCourses"
 
 const routes = [
   { path: "/", element: <Index /> },
@@ -20,5 +25,13 @@ const routes = [
   { path: "/search/:searchName", element: <Search /> },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
+  {
+    path: "/admin-panel/*", element: <AdminIndex />, children: [
+      { path: "user", element: <User /> },
+      { path: "menus", element: <Menus /> },
+      { path: "admin-articles", element: <AdminArticles /> },
+      { path: "admin-courses", element: <AdminCourses /> },
+    ]
+  },
 ];
 export default routes;
