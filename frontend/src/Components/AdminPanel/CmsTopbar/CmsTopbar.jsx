@@ -1,6 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function CmsTopbar() {
+    const [userInfo, setUserInfo] = useState({})
+
+    useEffect(() => {
+        const localStorageData = JSON.parse(localStorage.getItem("user"))
+        fetch("http://localhost:4000/v1/auth/me", {
+            headers: {
+                "Authorization": `Bearer ${localStorageData}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setUserInfo(data)
+            })
+    })
     return (
         <div class="container-fluid">
             <div class="container">
@@ -55,7 +70,7 @@ export default function CmsTopbar() {
                                 </a>
                             </div>
                             <div class="home-profile-name">
-                                <a href="#">علی تاجیک</a>
+                                <a href="#">{userInfo.name}</a>
                             </div>
                             <div class="home-profile-icon">
                                 <i class="fas fa-angle-down"></i>
