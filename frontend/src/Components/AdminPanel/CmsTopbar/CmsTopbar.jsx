@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 
 export default function CmsTopbar() {
     const [userInfo, setUserInfo] = useState({})
+    const [userNotification, setUserNotification] = useState([])
+    const [isShowNotifModal, setIsShowNotifModal] = useState(false)
 
     useEffect(() => {
         const localStorageData = JSON.parse(localStorage.getItem("user"))
@@ -14,51 +16,34 @@ export default function CmsTopbar() {
             .then(data => {
                 console.log(data);
                 setUserInfo(data)
+                setUserNotification(data.notifications)
             })
     })
     return (
         <div class="container-fluid">
             <div class="container">
-                <div class="home-header">
+                <div class={`home-header ${isShowNotifModal && "active-modal-notfication"}`}>
                     <div class="home-right">
                         <div class="home-searchbar">
                             <input type="text" class="search-bar" placeholder="جستجو..." />
                         </div>
                         <div class="home-notification">
                             <button type="button">
-                                <i class="far fa-bell"></i>
+                                <i class="far fa-bell" onMouseEnter={() => setIsShowNotifModal(true)}></i>
                             </button>
                         </div>
-                        <div class="home-notification-modal">
+                        <div class="home-notification-modal" onMouseEnter={() => setIsShowNotifModal(true)} onMouseLeave={() => setIsShowNotifModal(false)}>
                             <ul class="home-notification-modal-list">
-                                <li class="home-notification-modal-item">
-                                    <span class="home-notification-modal-text">پیغام ها</span>
-                                    <label class="switch">
-                                        <input type="checkbox" checked />
-                                        <span class="slider round"></span>
-                                    </label>
-                                </li>
-                                <li class="home-notification-modal-item">
-                                    <span class="home-notification-modal-text">پیغام ها</span>
-                                    <label class="switch">
-                                        <input type="checkbox" checked />
-                                        <span class="slider round"></span>
-                                    </label>
-                                </li>
-                                <li class="home-notification-modal-item">
-                                    <span class="home-notification-modal-text">پیغام ها</span>
-                                    <label class="switch">
-                                        <input type="checkbox" checked />
-                                        <span class="slider round"></span>
-                                    </label>
-                                </li>
-                                <li class="home-notification-modal-item">
-                                    <span class="home-notification-modal-text">پیغام ها</span>
-                                    <label class="switch">
-                                        <input type="checkbox" checked />
-                                        <span class="slider round"></span>
-                                    </label>
-                                </li>
+                                {userNotification.map(notification => (
+
+                                    <li class="home-notification-modal-item">
+                                        <span class="home-notification-modal-text">{notification}</span>
+                                        <label class="switch">
+                                            <a href="javascript:void(0)">دیدم</a>
+                                        </label>
+                                    </li>
+                                ))}
+
                             </ul>
                         </div>
                     </div>
