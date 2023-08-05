@@ -18,7 +18,20 @@ export default function CmsTopbar() {
                 setUserInfo(data)
                 setUserNotification(data.notifications)
             })
-    })
+    }, [seeNotification])
+    function seeNotification(notificationID) {
+        const localStorageData = JSON.parse(localStorage.getItem("user"))
+        fetch(`http://localhost:4000/v1/notifications/see/${notificationID}`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${localStorageData}`
+            }
+        })
+            .then(res => res.json())
+            .then(result => console.log(result
+            ))
+
+    }
     return (
         <div class="container-fluid">
             <div class="container">
@@ -39,7 +52,7 @@ export default function CmsTopbar() {
                                     <li class="home-notification-modal-item">
                                         <span class="home-notification-modal-text">{notification}</span>
                                         <label class="switch">
-                                            <a href="javascript:void(0)">دیدم</a>
+                                            <a href="javascript:void(0)" onClick={() => seeNotification(notification._id)}>دیدم</a>
                                         </label>
                                     </li>
                                 ))}
