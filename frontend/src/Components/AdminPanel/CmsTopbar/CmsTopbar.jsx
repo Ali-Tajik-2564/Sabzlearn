@@ -47,15 +47,22 @@ export default function CmsTopbar() {
                         </div>
                         <div class="home-notification-modal" onMouseEnter={() => setIsShowNotifModal(true)} onMouseLeave={() => setIsShowNotifModal(false)}>
                             <ul class="home-notification-modal-list">
-                                {userNotification.map(notification => (
+                                {userNotification.length === 0 ? (
+                                    <li class="home-notification-modal-item">
+                                        پیامی یافت نشد
+                                    </li>
+                                ) : (<>  {userNotification.map(notification => (
 
                                     <li class="home-notification-modal-item">
                                         <span class="home-notification-modal-text">{notification}</span>
                                         <label class="switch">
                                             <a href="javascript:void(0)" onClick={() => seeNotification(notification._id)}>دیدم</a>
                                         </label>
-                                    </li>
-                                ))}
+                                    </li>))}
+                                </>)}
+
+
+
 
                             </ul>
                         </div>

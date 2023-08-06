@@ -32,7 +32,7 @@ function App() {
       fetch("http://localhost:4000/v1/auth/me", {
         headers: {
           Authorization: `Bearer ${localStorageData}`,
-        },
+        }
       })
         .then((res) => res.json())
         .then((userData) => {
@@ -40,8 +40,10 @@ function App() {
           setUserInfo(userData);
           console.log(isLoggedIn);
         });
+    } else {
+      setIsLoggedIn(false)
     }
-  }, [login]);
+  }, [login, logout]);
   return (
     <AuthContext.Provider
       value={{
