@@ -56,7 +56,7 @@ export default function Sidebar() {
                         </Link>
                     </li>
                     <li>
-                        <Link to="user">
+                        <Link to="user/1">
                             <span>کاربران</span>
                         </Link>
                     </li>

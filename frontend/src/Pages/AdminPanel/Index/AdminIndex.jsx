@@ -12,9 +12,12 @@ export default function AdminIndex() {
                 <Sidebar />
                 <div className="col-10" id='home'>
                     <CmsTopbar />
+                    <div className="container-fluid" id='home-content'>
+
+                        <Outlet />
+                    </div>
                 </div>
             </div>
-            <Outlet />
         </>
     )
 }
