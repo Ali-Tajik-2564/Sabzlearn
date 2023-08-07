@@ -34,8 +34,8 @@ export default function CmsTopbar() {
     }
     return (
         <div class="container-fluid">
-            <div class="container">
-                <div class={`home-header ${isShowNotifModal && "active-modal-notfication"}`}>
+            <div class={`container${isShowNotifModal === true ? "active-modal-notfication" : ""}`}>
+                <div class={`home-header`}>
                     <div class="home-right">
                         <div class="home-searchbar">
                             <input type="text" class="search-bar" placeholder="جستجو..." />
@@ -51,14 +51,15 @@ export default function CmsTopbar() {
                                     <li class="home-notification-modal-item">
                                         پیامی یافت نشد
                                     </li>
-                                ) : (<>  {userNotification.map(notification => (
+                                ) : (<>
+                                    {userNotification.map(notification => (
 
-                                    <li class="home-notification-modal-item">
-                                        <span class="home-notification-modal-text">{notification}</span>
-                                        <label class="switch">
-                                            <a href="javascript:void(0)" onClick={() => seeNotification(notification._id)}>دیدم</a>
-                                        </label>
-                                    </li>))}
+                                        <li class="home-notification-modal-item">
+                                            <span class="home-notification-modal-text">{notification}</span>
+                                            <label class="switch">
+                                                <a href="javascript:void(0)" onClick={() => seeNotification(notification._id)}>دیدم</a>
+                                            </label>
+                                        </li>))}
                                 </>)}
 
 
