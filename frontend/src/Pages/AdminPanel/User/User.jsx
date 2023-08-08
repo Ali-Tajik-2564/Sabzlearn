@@ -22,8 +22,8 @@ export default function User() {
 
             })
     }, [shownUsers])
-    console.log(allUsers, "shown users");
-    function removeHandler(userId) {
+
+    const removeHandler = (userId) => {
         swal({
             title: "ایا از حذف اطمینان دارید؟"
             , icon: "warning"
@@ -32,6 +32,36 @@ export default function User() {
             .then(result => {
                 if (result) {
                     fetch(`http://localhost:4000/v1/users/${userId}`, {
+                        method: "DELETE",
+                        headers: {
+                            "Authorization": `Bearer ${localStorageData}`
+                        }
+                    })
+                }
+            })
+            .then(res => {
+
+                swal({
+                    title: "کاربر با موفقیت حذف شد",
+                    icon: "success",
+                    button: "اوکی"
+                })
+                    .then(() => {
+                        console.log(allUsers);
+                    })
+
+            })
+
+    }
+    const banHAndler = (userID) => {
+        swal({
+            title: "ایا از حذف اطمینان دارید؟"
+            , icon: "warning"
+            , buttons: ["نه", "اره"]
+        })
+            .then(result => {
+                if (result) {
+                    fetch(`http://localhost:4000/v1/users/ban/${userId}`, {
                         method: "DELETE",
                         headers: {
                             "Authorization": `Bearer ${localStorageData}`
@@ -51,7 +81,6 @@ export default function User() {
                         })
                 }
             })
-
     }
     return (
         <>
@@ -93,7 +122,7 @@ export default function User() {
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-danger delete-btn">
+                                    <button type="button" class="btn btn-danger delete-btn" onClick={() => banHAndler(user._Id)}>
                                         بن
                                     </button>
                                 </td>
