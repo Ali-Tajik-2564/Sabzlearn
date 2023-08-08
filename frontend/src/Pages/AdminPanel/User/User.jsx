@@ -30,26 +30,27 @@ export default function User() {
 
                         <tr>
                             <th>شناسه</th>
-                            <th>نام</th>
+                            {/* <th>نام</th> */}
                             <th>نام خانوادگی</th>
                             <th>شماره</th>
                             <th>ایمیل</th>
-                            <th>رمز عبور</th>
+                            {/* <th>رمز عبور</th> */}
                             <th>ویرایش</th>
                             <th>حذف</th>
+                            <th>بن</th>
                         </tr>
                     </thead>
                     <tbody>
 
 
-                        {allUsers.map((user) => (
+                        {shownUsers.map((user, index) => (
                             <tr>
-                                <td>{user._id}</td>
-                                <td>{user.username}</td>
+                                <td>{index + 1}</td>
+                                {/* <td>{user.username}</td> */}
                                 <td>{user.name}</td>
                                 <td>{user.phone}</td>
                                 <td>{user.email}</td>
-                                <td>{user.password}</td>
+                                {/* <td>{user.password}</td> */}
                                 <td>
                                     <button type="button" class="btn btn-primary edit-btn">
                                         ویرایش
@@ -58,6 +59,11 @@ export default function User() {
                                 <td>
                                     <button type="button" class="btn btn-danger delete-btn">
                                         حذف
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger delete-btn">
+                                        بن
                                     </button>
                                 </td>
                             </tr>

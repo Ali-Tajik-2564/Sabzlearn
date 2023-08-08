@@ -27,7 +27,7 @@ const routes = [
   { path: "/register", element: <Register /> },
   {
     path: "/admin-panel/*", element: <AdminIndex />, children: [
-      { path: "user/:pagename", element: <User /> },
+      { path: "user/:page", element: <User /> },
       { path: "menus", element: <Menus /> },
       { path: "admin-articles", element: <AdminArticles /> },
       { path: "admin-courses", element: <AdminCourses /> },
