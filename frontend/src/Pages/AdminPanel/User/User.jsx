@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./User.css"
 import Table from '../../../Components/AdminPanel/Table/Table'
 import Pagination from "../../../Components/Pagination/Pagination"
+import swal from 'sweetalert'
 
 
 export default function User() {
@@ -20,8 +21,38 @@ export default function User() {
                 console.log(result);
 
             })
-    }, [])
+    }, [shownUsers])
     console.log(allUsers, "shown users");
+    function removeHandler(userId) {
+        swal({
+            title: "ایا از حذف اطمینان دارید؟"
+            , icon: "warning"
+            , buttons: ["نه", "اره"]
+        })
+            .then(result => {
+                if (result) {
+                    fetch(`http://localhost:4000/v1/users/${userId}`, {
+                        method: "DELETE",
+                        headers: {
+                            "Authorization": `Bearer ${localStorageData}`
+                        }
+                    })
+                }
+            })
+            .then(res => {
+                if (res.ok) {
+                    swal({
+                        title: "کاربر با موفقیت حذف شد",
+                        icon: "success",
+                        button: "اوکی"
+                    })
+                        .then(() => {
+                            console.log(allUsers);
+                        })
+                }
+            })
+
+    }
     return (
         <>
             <Table title=" کاربران">
@@ -57,7 +88,7 @@ export default function User() {
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-danger delete-btn">
+                                    <button type="button" class="btn btn-danger delete-btn" onClick={() => removeHandler(user._id)}>
                                         حذف
                                     </button>
                                 </td>
