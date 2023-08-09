@@ -15,6 +15,7 @@ import {
 } from "../../Validator/rules";
 import AuthContext from "../../Context/AuthContext";
 import "./Register.css";
+import swal from "sweetalert"
 
 export default function Register() {
   const authContext = useContext(AuthContext);
@@ -60,7 +61,19 @@ export default function Register() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newUser),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+
+          res.json()
+        } else if (res.status === 403) {
+          swal({
+            title: "این شماره تماس بن شده است",
+            icon: "error",
+            button: "ای بابا"
+          })
+
+        }
+      })
       .then((result) => {
         console.log(result);
         authContext.login(result.user, result.accessToken);
@@ -165,11 +178,10 @@ export default function Register() {
               <i class='login-form__password-icon fa fa-phone'></i>
             </div>
             <Button
-              className={`login-form__btn ${
-                formState.isFormValid
-                  ? "login-form__btn-success"
-                  : "login-form__btn-error"
-              }`}
+              className={`login-form__btn ${formState.isFormValid
+                ? "login-form__btn-success"
+                : "login-form__btn-error"
+                }`}
               type='submit'
               onClick={useRegister}
               disabled={!formState.isFormValid}>
