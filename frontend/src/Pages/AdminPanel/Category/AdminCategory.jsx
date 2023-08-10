@@ -1,8 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import Table from '../../../Components/AdminPanel/Table/Table'
+import swal from 'sweetalert'
+import Input from "./../../../Components/Form/Input/Input"
+import { useForm } from "./../../../hooks/useForm";
+import {
+    requiredValidator,
+    minValidator,
+    maxValidator,
+    emailValidator,
+} from "../../../Validator/rules";
 
 export default function AdminCagetory() {
     const [categories, setCategories] = useState([])
+    const localStorageData = JSON.parse(localStorage.getItem("user"))
+
+    const [formState, onInputHandler] = useForm(
+        {
+            title: {
+                value: "",
+                isValid: false,
+            },
+            name: {
+                value: "",
+                isValid: false,
+            },
+
+        },
+        false
+    );
+
     useEffect(() => {
         getAllCategory()
     }, [])
@@ -14,8 +40,89 @@ export default function AdminCagetory() {
                 setCategories(allcagetories)
             })
     }
+    const registerNewCategory = (event) => {
+        event.preventDefault()
+        let newCategory = {
+            title: formState.inputs.title.value,
+            name: formState.inputs.name.value
+        }
+        fetch("http://localhost:4000/v1/category", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorageData}`
+            }
+            , body: JSON.stringify(newCategory)
+        })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result);
+                swal({
+                    title: "دسته بندی مورد نظر با موفقیت اضافه شد"
+                    , icon: "success",
+                    buttons: "ok"
+                })
+                    .then(() => {
+                        getAllCategory()
+                    })
+            })
+    }
     return (
         <>
+            <div class="home-content-edit">
+                <div class="back-btn">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                <form class="form">
+                    <div class="col-6">
+                        <div class="name input">
+                            <label class="input-title">عنوان</label>
+                            <Input
+                                type="text"
+                                className=""
+                                id="name"
+                                element="input"
+                                validations={[
+                                    requiredValidator(),
+                                    minValidator(8),
+                                    maxValidator(20),
+                                ]}
+                                onInputHandler={onInputHandler}
+                                placeholder="لطفا عنوان دسته بندی  را وارد کنید..."
+                            />
+                            <span class="error-message text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="family input">
+                            <label class="input-title">اسم دسته بندی</label>
+                            <Input
+                                type="text"
+                                className=""
+                                id="title"
+                                element="input"
+                                validations={[
+                                    requiredValidator(),
+                                    minValidator(8),
+                                    maxValidator(20),
+                                ]}
+                                onInputHandler={onInputHandler}
+                                placeholder="لطفا نام دسته بندی را وارد کنید..."
+                            />
+                            <span class="error-message text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="bottom-form">
+                            <div class="submit-btn">
+                                <input type="submit" value="افزودن" onClick={(event) => registerNewCategory(event)} />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
             <Table title="دسته بندی ها">
                 <table class="table">
                     <thead>
