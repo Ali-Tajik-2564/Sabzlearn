@@ -70,6 +70,7 @@ export default function User() {
                     fetch(`http://localhost:4000/v1/users/${userId}`, {
                         method: "DELETE",
                         headers: {
+                            "Content-Type": "application/json",
                             "Authorization": `Bearer ${localStorageData}`
                         }
                     })
@@ -91,32 +92,33 @@ export default function User() {
     }
     const banHAndler = (userID) => {
         swal({
-            title: "ایا از حذف اطمینان دارید؟"
+            title: "ایا از بن اطمینان دارید؟"
             , icon: "warning"
             , buttons: ["نه", "اره"]
         })
             .then(result => {
                 if (result) {
-                    fetch(`http://localhost:4000/v1/users/ban/${userId}`, {
-                        method: "DELETE",
+                    fetch(`http://localhost:4000/v1/users/ban/${userID}`, {
+                        method: "PUT",
                         headers: {
+                            "Content-Type": "application/json",
                             "Authorization": `Bearer ${localStorageData}`
+                        }
+                    }).then(res => {
+                        if (res) {
+                            swal({
+                                title: "کاربر با موفقیت بن شد",
+                                icon: "success",
+                                button: "اوکی"
+                            })
+                                .then(() => {
+                                    console.log(allUsers);
+                                })
                         }
                     })
                 }
             })
-            .then(res => {
-                if (res.ok) {
-                    swal({
-                        title: "کاربر با موفقیت حذف شد",
-                        icon: "success",
-                        button: "اوکی"
-                    })
-                        .then(() => {
-                            console.log(allUsers);
-                        })
-                }
-            })
+
     }
     const registerNewUser = (event) => {
         event.preventDefault();
@@ -133,6 +135,7 @@ export default function User() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
+
             },
             body: JSON.stringify(newUserInfo)
         }).then(res => {
