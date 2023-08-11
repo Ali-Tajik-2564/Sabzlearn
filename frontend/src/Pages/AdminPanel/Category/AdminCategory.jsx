@@ -98,6 +98,40 @@ export default function AdminCagetory() {
                 }
             })
     }
+    const updateCategory = (categoryID) => {
+
+        swal({
+            title: "عنوان   جدید را وارد کنید"
+            , content: "input"
+            , buttons: "ثبت"
+        }).then(resultName => {
+            newTitle.title = resultName
+            fetch(`http://localhost:4000/v1/category/${categoryID}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorageData}`
+                }
+                , body: JSON.stringify(() => {
+                    title: resultName
+
+                })
+            })
+                .then(res => res.json())
+                .then(() => {
+                    swal({
+                        title: "اطلاعات با موفقیت ویرایش شد",
+                        icon: "success"
+                        , buttons: "ok"
+                    })
+                        .then(() => {
+                            getAllCategory()
+                        })
+                })
+
+        })
+
+    }
     return (
         <>
             <div class="home-content-edit">
@@ -173,7 +207,7 @@ export default function AdminCagetory() {
                                 <td>{index + 1}</td>
                                 <td>{user.name}</td>
                                 <td>
-                                    <button type="button" class="btn btn-primary edit-btn">
+                                    <button type="button" class="btn btn-primary edit-btn" onClick={() => updateCategory(user._id)}>
                                         ویرایش
                                     </button>
                                 </td>
