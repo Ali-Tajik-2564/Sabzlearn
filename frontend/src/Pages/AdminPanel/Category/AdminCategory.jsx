@@ -67,6 +67,37 @@ export default function AdminCagetory() {
                     })
             })
     }
+    const removeHandler = (categoryID) => {
+        swal({
+            title: "ایا از حذف مطمٰن هستید؟",
+            icon: "warning",
+            buttons: ["نه", "اره"]
+        })
+            .then((result) => {
+                if (result) {
+                    fetch(`http://localhost:4000/v1/category/${categoryID}`, {
+                        method: "DELETE",
+                        headers: {
+                            "Authorization": `Bearer ${localStorageData}`
+                        }
+                    })
+                        .then(res => res.json())
+                        .then((ans) => {
+                            if (ans) {
+                                swal({
+                                    title: "دسته بندی با موفقیت هذف شد"
+                                    , icon: "success"
+                                    , buttons: "ok"
+                                })
+                                    .then(() => {
+                                        getAllCategory()
+                                    })
+                            }
+                        })
+
+                }
+            })
+    }
     return (
         <>
             <div class="home-content-edit">
