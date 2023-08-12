@@ -95,7 +95,31 @@ export default function AdminCourses() {
     };
     const addNewCourse = event => {
         event.preventDefault()
-        console.log(formState);
+        let fromData = new FormData()
+        fromData.append("name", formState.inputs.name.value)
+        fromData.append("description", formState.inputs.description.value)
+        fromData.append("cover", courseCover)
+        fromData.append("shortName", formState.inputs.shortName.value)
+        fromData.append("price", formState.inputs.price.value)
+        fromData.append("status", courseStatus)
+        fromData.append("categoryID", courseCategory)
+
+        fetch("http://localhost:4000/v1/courses", {
+            method: "POST",
+            headers: { "Authorization": `Bearer ${localStorageData}` }
+            , body: fromData
+        })
+            .then(res => res.json())
+            .then(result => {
+                swal({
+                    title: "دوره با موفقیت افزوده شد"
+                    , icon: 'success'
+                    , buttons: "ok"
+                })
+                    .then(() => {
+                        getAllCourses()
+                    })
+            })
     }
     return (
         <>
