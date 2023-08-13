@@ -5,6 +5,9 @@ export default function AdminContact() {
     const localStorageData = JSON.parse(localStorage.getItem("user"))
     const [contacts, setContacts] = useState([])
     useEffect(() => {
+        getAllContacts()
+    }, [])
+    function getAllContacts() {
         fetch("http://localhost:4000/v1/contact")
             .then(res => res.json())
             .then(allContants => {
@@ -12,7 +15,7 @@ export default function AdminContact() {
                 );
                 setContacts(allContants)
             })
-    }, [])
+    }
     const showContactBody = (body) => {
         swal({
             title: body,
@@ -54,6 +57,39 @@ export default function AdminContact() {
 
             })
     }
+    const removeContact = (ContactID) => {
+        swal({
+            title: "ایا از  حذف اطمینان دارید؟"
+            , icon: "warning",
+            buttons: ["نه", "اره"]
+        })
+            .then(result => {
+                if (result) {
+                    fetch(`http://localhost:4000/v1/contact/${ContactID}`, {
+                        method: "DELETE",
+                        headers: {
+                            "Authorization": `Bearer ${localStorageData}`
+                        }
+                    })
+                        .then(res => {
+                            if (res.ok) {
+                                console.log(res);
+                            }
+
+                        })
+                        .then(result => {
+                            swal({
+                                title: "با موفقیت پیغام حذف شد"
+                                , icon: "success"
+                                , buttons: "ok"
+                            })
+                                .then(() => {
+                                    getAllContacts()
+                                })
+                        })
+                }
+            })
+    }
     return (
         <>
 
@@ -92,7 +128,7 @@ export default function AdminContact() {
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-danger delete-btn"  >
+                                    <button type="button" class="btn btn-danger delete-btn" onClick={() => removeContact(contact._id)} >
                                         حذف
                                     </button>
                                 </td>
