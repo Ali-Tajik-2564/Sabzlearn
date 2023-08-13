@@ -71,6 +71,11 @@ export default function Sidebar() {
                         </Link>
                     </li>
                     <li>
+                        <Link to="contact" >
+                            <span>پیغام ها</span>
+                        </Link>
+                    </li>
+                    <li>
                         <Link to="#" onClick={event => logout(event)}>
                             <span>خروج</span>
                         </Link>
