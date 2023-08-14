@@ -13,6 +13,7 @@ export default function AdminArticles() {
     const [articleCategory, setArticleCategory] = useState("-1");
     const [articleCover, setArticleCover] = useState({});
     const [articleBody, setArticleBody] = useState("")
+    console.log(articles);
 
     const [formState, onInputHandler] = useForm(
         {
@@ -63,7 +64,7 @@ export default function AdminArticles() {
                 fetch(`http://localhost:4000/v1/articles/${articleID}`, {
                     method: "DELETE",
                     headers: {
-                        Authorization: `Bearer ${localStorageDate.token}`,
+                        "Authorization": `Bearer ${localStorageData}`
                     },
                 }).then((res) => {
                     if (res.ok) {
@@ -80,7 +81,37 @@ export default function AdminArticles() {
         });
     };
 
+    const articleCreator = (event) => {
+        event.preventDefault()
+        let fromArticleData = new FormData()
+        fromArticleData.append("title", formState.inputs.title.value)
+        fromArticleData.append("description", formState.inputs.description.value)
+        fromArticleData.append("shortName", formState.inputs.shortName.value)
+        fromArticleData.append("cover", articleCover)
+        fromArticleData.append("categoryID", articleCategory)
+        fromArticleData.append("body", articleBody)
 
+        fetch("http://localhost:4000/v1/articles", {
+            method: "POST",
+            headers: {
+
+                "Authorization": `Bearer ${localStorageData}`
+            }
+            , body: fromArticleData
+        })
+            .then(res => {
+                if (res.ok) {
+                    swal({
+                        title: "مقاله با موفقیت ثبت شد"
+                        , icon: "success"
+                        , buttons: "ok"
+                    })
+                        .then(() => {
+                            getAllArticles()
+                        })
+                }
+            })
+    }
     return (
         <>
             <div class="container-fluid" id="home-content">
@@ -171,7 +202,7 @@ export default function AdminArticles() {
                         <div class="col-12">
                             <div class="bottom-form">
                                 <div class="submit-btn">
-                                    <input type="submit" value="افزودن" />
+                                    <input type="submit" value="افزودن" onClick={() => articleCreator(event)} />
                                 </div>
                             </div>
                         </div>
@@ -198,9 +229,9 @@ export default function AdminArticles() {
                         {articles.map((article, index) => (
                             <tr>
                                 <td>{index + 1}</td>
-                                <td>{article.name}</td>
-                                <td>{article.email}</td>
-                                <td>{article.phone}</td>
+                                <td>{article.title}</td>
+                                <td>{article.shortName}</td>
+                                <td>{article.creator.username}</td>
 
                                 <td>
                                     <button type="button" class="btn btn-primary edit-btn" >
