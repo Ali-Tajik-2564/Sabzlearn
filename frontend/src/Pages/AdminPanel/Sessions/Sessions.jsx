@@ -11,6 +11,7 @@ export default function Sessions() {
     const [allSessions, setAllSessions] = useState([])
     const [sessionCourse, setSessionCourse] = useState('-1');
     const [sessionFile, setSessionFile] = useState('-1');
+    const [isSessionsFree, setIsSessionsFree] = useState('1');
     const [formState, onInputHandler] = useForm(
         {
             title: {
@@ -48,6 +49,7 @@ export default function Sessions() {
         fromNewSession.append("title", formState.inputs.title.value)
         fromNewSession.append("time", formState.inputs.time.value)
         fromNewSession.append("video", sessionFile)
+        fromNewSession.append("free", isSessionsFree)
 
         fetch(`http://localhost:4000/v1/courses/${sessionCourse}/sessions`, {
             method: "POST",
@@ -162,7 +164,31 @@ export default function Sessions() {
                                 <span class="error-message text-danger"></span>
                             </div>
                         </div>
-
+                        <div class="radios">
+                            <div class="available">
+                                <label>
+                                    <span>رایگان</span>
+                                    <input
+                                        type="radio"
+                                        value="0"
+                                        name="condition"
+                                        checked
+                                        onInput={event => setIsSessionsFree(event.target.value)}
+                                    />
+                                </label>
+                            </div>
+                            <div class="unavailable">
+                                <label>
+                                    <span>غیر رایگان</span>
+                                    <input
+                                        type="radio"
+                                        value="1"
+                                        name="condition"
+                                        onInput={event => setIsSessionsFree(event.target.value)}
+                                    />
+                                </label>
+                            </div>
+                        </div>
                         <div class="col-12">
                             <div class="bottom-form">
                                 <div class="submit-btn">

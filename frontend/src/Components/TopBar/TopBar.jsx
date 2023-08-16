@@ -1,13 +1,19 @@
-import React, { useCallback, useEffect, useState  , memo} from "react";
+import React, { useCallback, useEffect, useState, memo } from "react";
 import { Link } from "react-router-dom";
 import "./TopBar.css";
 export default memo(function TopBar() {
   const [allTopBartLink, setAllTopBarLinks] = useState([]);
+  const [info, setInfo] = useState([])
   useEffect(() => {
     fetch("http://localhost:4000/v1/menus/topbar")
       .then((res) => res.json())
       .then((data) => setAllTopBarLinks(data));
-  },[]);
+
+    fetch("http://localhost:4000/v1/infos/index")
+      .then(res => res.json())
+      .then(result => setInfo(result))
+
+  }, []);
 
   const RandomTopBarLinks = useCallback((arr, linksCount) => {
     let shuffle = [...arr].sort(() => 0.5 - Math.random());
@@ -40,13 +46,15 @@ export default memo(function TopBar() {
             <div class='top-bar__left'>
               <div class='top-bar__email'>
                 <a href='#' class='top-bar__email-text top-bar__link'>
-                  sabzlearn@gmail.com
+                  {/* sabzlearn@gmail.com */}
+                  {info.email}
                 </a>
                 <i class='fas fa-envelope top-bar__email-icon'></i>
               </div>
               <div class='top-bar__phone'>
                 <a href='#' class='top-bar__phone-text top-bar__link'>
-                  09921558293
+                  {/* 09921558293 */}
+                  {info.phone}
                 </a>
                 <i class='fas fa-phone top-bar__phone-icon'></i>
               </div>

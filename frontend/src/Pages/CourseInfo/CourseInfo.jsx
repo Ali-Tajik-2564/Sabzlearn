@@ -22,9 +22,8 @@ export default function CourseInfo() {
   useEffect(() => {
     fetch(`http://localhost:4000/v1/courses/${courseName}`, {
       headers: {
-        Authorization: `Bearer ${
-          LocalStorageToken === "" ? null : LocalStorageToken
-        }}`,
+        Authorization: `Bearer ${LocalStorageToken === "" ? null : LocalStorageToken
+          }}`,
       },
     })
       .then((res) => res.json())
@@ -37,7 +36,7 @@ export default function CourseInfo() {
         setTeacherInfo(courseData.creator);
         console.log(courseData);
       });
-  },[]);
+  }, []);
   const onSubmitHandler = (enteredComment) => {
     fetch("http://localhost:4000/v1/comments", {
       method: "POST",
@@ -240,20 +239,41 @@ export default function CourseInfo() {
                       <Accordion.Header>جلسات دوره</Accordion.Header>
                       {sessions.map((session, index) => (
                         <Accordion.Body className='introduction__accordion-body'>
-                          <div class='introduction__accordion-right'>
-                            <span class='introduction__accordion-count'>
-                              {index + 1}
-                            </span>
-                            <i class='fab fa-youtube introduction__accordion-icon'></i>
-                            <a href='#' class='introduction__accordion-link'>
-                              معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
-                            </a>
-                          </div>
-                          <div class='introduction__accordion-left'>
-                            <span class='introduction__accordion-time'>
-                              {session.time}
-                            </span>
-                          </div>
+                          {sessions.free = 1 || courseDetail.isUserRegisteredToThisCourse === true ? (
+                            <>  <div class='introduction__accordion-right'>
+                              <span class='introduction__accordion-count'>
+                                {index + 1}
+                              </span>
+                              <i class='fab fa-youtube introduction__accordion-icon'></i>
+                              <Link to="/" class='introduction__accordion-link'>
+                                معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
+                              </Link>
+                            </div>
+                              <div class='introduction__accordion-left'>
+                                <span class='introduction__accordion-time'>
+                                  {session.time}
+                                </span>
+                              </div>
+                            </>
+                          ) : (
+                            <>  <div class='introduction__accordion-right'>
+                              <span class='introduction__accordion-count'>
+                                {index + 1}
+                              </span>
+                              <i class='fab fa-youtube introduction__accordion-icon'></i>
+                              <span class='introduction__accordion-link'>
+                                معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
+                              </span>
+                            </div>
+                              <div class='introduction__accordion-left'>
+                                <span class='introduction__accordion-time'>
+                                  {session.time}
+                                </span>
+                                <i className="fa fa-lock"></i>
+                              </div>
+                            </>
+                          )}
+
                         </Accordion.Body>
                       ))}
                     </Accordion.Item>
