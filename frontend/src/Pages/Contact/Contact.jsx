@@ -18,63 +18,65 @@ import {
 export default function Contact() {
   const navigate = useNavigate();
 
-    const [formState, onInputHandler] = useForm(
-        {
-          name: {
-            value: "",
-            isValid: false,
-          },
-          email: {
-            value: "",
-            isValid: false,
-          },
-          phone: {
-            value: "",
-            isValid: false,
-          },
-          textarea: {
-            value: "",
-            isValid: false,
-          },
-        },
-        false,
-      );
-      const onContactHandler = (event) => {
-        event.preventDefault()
-        const newContact = {
-          name: formState.inputs.name.value, 
-          email: formState.inputs.email.value,
-          phone: formState.inputs.phone.value, 
-          body: formState.inputs.textarea.value,
+  const [formState, onInputHandler] = useForm(
+    {
+      name: {
+        value: "",
+        isValid: false,
+      },
+      email: {
+        value: "",
+        isValid: false,
+      },
+      phone: {
+        value: "",
+        isValid: false,
+      },
+      textarea: {
+        value: "",
+        isValid: false,
+      },
+    },
+    false,
+  );
+  const onContactHandler = (event) => {
+    event.preventDefault()
+    const newContact = {
+      name: formState.inputs.name.value,
+      email: formState.inputs.email.value,
+      phone: formState.inputs.phone.value,
+      body: formState.inputs.textarea.value,
+    }
+    fetch("http://localhost:4000/v1/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" }
+      , body: JSON.stringify(newContact)
+    })
+      .then(res => {
+        res.json()
+        console.log(res);
+        if (res.ok) {
+          swal({
+            title: "پیام شما با موفقیت به مدیران سایت ارسال شد",
+            icon: "success",
+            button: " حله منو ببر به صفحه اصلی",
+          }).then((value) => {
+            get
+            navigate("/");
+          });
+
         }
-        fetch("http://localhost:4000/v1/contact" , {
-          method: "POST" ,
-          headers : { "Content-Type" : "application/json"}
-          , body : JSON.stringify(newContact)
-        })
-        .then(res => {
-          res.json()
-          console.log(res);
-          if(res.ok){
-            swal({
-              title: "پیام شما با موفقیت به مدیران سایت ارسال شد",
-              icon: "success",
-              button: " حله منو ببر به صفحه اصلی",
-            }).then((value) => {
-              navigate("/");
-            });
-          }
-        })
-      }
+      })
+  }
   return (
     <>
-    <TopBar />
-    <MainHeader />
-    <section class='login-register'>
+      <TopBar />
+      <MainHeader />
+      <section class='login-register'>
         <div class='login register-form'>
           <span class='login__title'>ثبت نظرات</span>
           <span class='login__subtitle'>خوشحالیم قراره که با نظرت به ما کمک کنی</span>
-          
+
           <form action='#' class='login-form'>
             <div class='login-form__username'>
               <Input
@@ -93,7 +95,7 @@ export default function Contact() {
 
               <i class='login-form__username-icon fa fa-user'></i>
             </div>
-           
+
             <div class='login-form__password'>
               <Input
                 className='login-form__password-input'
@@ -107,7 +109,7 @@ export default function Contact() {
 
               <i class='login-form__password-icon fa fa-envelope'></i>
             </div>
-            
+
             <div class='login-form__password'>
               <Input
                 className='login-form__password-input'
@@ -142,11 +144,10 @@ export default function Contact() {
               <i class='login-form__password-icon fa fa-envelope-open'></i>
             </div>
             <Button
-              className={`login-form__btn ${
-                formState.isFormValid
+              className={`login-form__btn ${formState.isFormValid
                   ? "login-form__btn-success"
                   : "login-form__btn-error"
-              }`}
+                }`}
               type='submit'
               onClick={event => onContactHandler(event)}
               disabled={!formState.isFormValid}>
@@ -171,7 +172,7 @@ export default function Contact() {
           </div>
         </div>
       </section>
-    <Footer />
+      <Footer />
     </>
   )
 }

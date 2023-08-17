@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Table from '../../../Components/AdminPanel/Table/Table'
 import swal from 'sweetalert'
+import "./AdminContact.css"
 export default function AdminContact() {
     const localStorageData = JSON.parse(localStorage.getItem("user"))
     const [contacts, setContacts] = useState([])
@@ -53,6 +54,7 @@ export default function AdminContact() {
                             , icon: "success",
                             buttons: "ok"
                         })
+                        getAllContacts()
                     })
 
             })
@@ -98,7 +100,7 @@ export default function AdminContact() {
                     <thead>
 
                         <tr>
-                            <th>شناسه</th>
+                            <th >شناسه</th>
                             <th>عنوان</th>
                             <th>ایمیل </th>
                             <th>شماره تماس</th>
@@ -112,7 +114,7 @@ export default function AdminContact() {
 
                         {contacts.map((contact, index) => (
                             <tr>
-                                <td>{index + 1}</td>
+                                <td className={contact.answer === 1 ? "answer" : "no-answer"}>{index + 1}</td>
                                 <td>{contact.name}</td>
                                 <td>{contact.email}</td>
                                 <td>{contact.phone}</td>

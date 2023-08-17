@@ -16,6 +16,7 @@ import AdminCourses from "./Pages/AdminPanel/AdminCourses/AdminCourses"
 import AdminCategory from "./Pages/AdminPanel/Category/AdminCategory";
 import AdminContact from "./Pages/AdminPanel/AdminContact/AdminContact";
 import Sessions from "./Pages/AdminPanel/Sessions/Sessions";
+import SessionInfo from "./Pages/SessionInfo/SessionInfo";
 
 const routes = [
   { path: "/", element: <Index /> },
@@ -28,6 +29,7 @@ const routes = [
   { path: "/search/:searchName", element: <Search /> },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
+  { path: "/:shortName/:sessionID", element: <SessionInfo /> },
   {
     path: "/admin-panel/*", element: <AdminIndex />, children: [
       { path: "user/:page", element: <User /> },

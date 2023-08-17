@@ -239,13 +239,13 @@ export default function CourseInfo() {
                       <Accordion.Header>جلسات دوره</Accordion.Header>
                       {sessions.map((session, index) => (
                         <Accordion.Body className='introduction__accordion-body'>
-                          {sessions.free = 1 || courseDetail.isUserRegisteredToThisCourse === true ? (
+                          {session.free = 1 || courseDetail.isUserRegisteredToThisCourse === true ? (
                             <>  <div class='introduction__accordion-right'>
                               <span class='introduction__accordion-count'>
                                 {index + 1}
                               </span>
                               <i class='fab fa-youtube introduction__accordion-icon'></i>
-                              <Link to="/" class='introduction__accordion-link'>
+                              <Link to={`${courseName}/${session._id}`} class='introduction__accordion-link'>
                                 معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
                               </Link>
                             </div>
