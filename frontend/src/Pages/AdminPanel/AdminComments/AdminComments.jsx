@@ -45,6 +45,84 @@ export default function AdminComments() {
         }
       })
   }
+  const answerComment = (commentID) => {
+    swal({
+      title: 'پیام خود را وارد کنید'
+      , content: "input"
+      , buttons: "ارسال"
+    })
+      .then(result => {
+        fetch(`http://localhost:4000/v1/comments/answer/${commentID}`, {
+          method: "POST"
+          , headers: {
+
+            "Authorization": `Bearer ${localStorageData}`
+          }
+          , body: JSON.stringify(result)
+        })
+          .then(res => {
+            res.json()
+            if (res.ok) {
+              swal({
+                title: "پیام با موفقیت ارسال شد"
+                , icon: "success"
+                , buttons: "ok"
+
+              })
+                .then(() => {
+                  getAllComments()
+                })
+            }
+          })
+      })
+  }
+  const banComment = (commentID, body) => {
+    fetch(`http://localhost:4000/v1/comments/reject/${commentID}`, {
+      method: "POST"
+      , headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorageData}`
+      }
+      , body: JSON.stringify(body)
+    })
+      .then(res => {
+        res.json()
+        if (res.ok) {
+          swal({
+            title: "کامنت با موفقیت بن شد"
+            , icon: "success"
+            , buttons:
+              "ok"
+          })
+            .then(() => {
+              getAllComments()
+            })
+        }
+      })
+  }
+  const deleteComment = (commentID) => {
+    fetch(`http://localhost:4000/v1/comments/${commentID}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${localStorageData}`
+      }
+
+    })
+      .then(res => {
+        res.json()
+        if (res.ok) {
+          swal({
+            title: "کامنت با موفقیت حذف شد"
+            , icon: "success"
+            , buttons: "ok"
+          })
+            .then(() => {
+              getAllComments()
+            })
+        }
+      }
+      )
+  }
   return (
     <>  <Table title="کامنت ها">
       <table class="table">
@@ -78,17 +156,17 @@ export default function AdminComments() {
                 </button>
               </td>
               <td>
-                <button type="button" class="btn btn-primary edit-btn">
+                <button type="button" class="btn btn-primary edit-btn" onClick={() => answerComment(comment._id)}>
                   پاسخ
                 </button>
               </td>
               <td>
-                <button type="button" class="btn btn-danger delete-btn">
+                <button type="button" class="btn btn-danger delete-btn" onClick={() => banComment(comment._id, comment.body)}>
                   بن
                 </button>
               </td>
               <td>
-                <button type="button" class="btn btn-danger delete-btn" >
+                <button type="button" class="btn btn-danger delete-btn" onClick={() => deleteComment(comment._id)}>
                   حذف
                 </button>
               </td>

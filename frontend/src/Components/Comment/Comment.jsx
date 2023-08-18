@@ -27,34 +27,40 @@ export default function Comment({ comments, onSubmit }) {
           <>
             {comments.map((comment) => (
               <div class='comments__item'>
-                <div class='comments__question'>
-                  <div class='comments__question-header'>
-                    <div class='comments__question-header-right'>
-                      <span class='comments__question-name comment-name'>
-                        {comment.creator.name}
-                      </span>
-                      <span class='comments__question-status comment-status'>
-                        {comment.creator.role === "ADMIN" ? "مدیر" : "کاربر"}
-                      </span>
-                      <span class='comments__question-date comment-date'>
-                        {comment.createdAt.slice(0, 10)}
-                      </span>
+
+
+                {comment.answerContent && (
+                  <>
+                    <div class='comments__question'>
+                      <div class='comments__question-header'>
+                        <div class='comments__question-header-right'>
+                          <span class='comments__question-name comment-name'>
+                            {comment.answerContent.creator.name}
+                          </span>
+                          <span class='comments__question-status comment-status'>
+                            {comment.answerContent.creator.role === "ADMIN" ? "مدیر" : "کاربر"}
+                          </span>
+                          <span class='comments__question-date comment-date'>
+                            {comment.answerContent.createdAt.slice(0, 10)}
+                          </span>
+                        </div>
+                        <div class='comments__question-header-left'>
+                          <a
+                            class='comments__question-header-link comment-link'
+                            href='#'>
+                            پاسخ
+                          </a>
+                        </div>
+                      </div>
+                      <div class='comments__question-text'>
+                        <p class='comments__question-paragraph comment-paragraph'>
+                          {comment.answerContent.body}
+                        </p>
+                      </div>
+
                     </div>
-                    <div class='comments__question-header-left'>
-                      <a
-                        class='comments__question-header-link comment-link'
-                        href='#'>
-                        پاسخ
-                      </a>
-                    </div>
-                  </div>
-                  <div class='comments__question-text'>
-                    <p class='comments__question-paragraph comment-paragraph'>
-                      {comment.body}
-                    </p>
-                  </div>
-                </div>
-              </div>
+                  </>
+                )}</div>
             ))}
             <div class='comments__pagantion'>
               <ul class='comments__pagantion-list'>
