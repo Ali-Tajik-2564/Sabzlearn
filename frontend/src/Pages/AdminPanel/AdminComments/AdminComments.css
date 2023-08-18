@@ -1,0 +1,8 @@
+.answer {
+  color: #fff;
+  background-color: var(--primary-color) !important;
+}
+.no-answer {
+  color: #fff;
+  background-color: orangered4 !important;
+}
