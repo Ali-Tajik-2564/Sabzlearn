@@ -32,7 +32,7 @@ export default function LastArticles() {
             slidesPerView={3}
             onSwiper={(swiper) => console.log(swiper)}
             onSlideChange={() => console.log("slide change")}>
-            {articles.map((article) => (
+            {articles.filter(article => article.publish === 1).map((article) => (
               <SwiperSlide>
                 <LastArticleBox {...article} />
               </SwiperSlide>

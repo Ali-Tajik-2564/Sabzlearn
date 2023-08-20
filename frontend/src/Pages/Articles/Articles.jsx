@@ -16,7 +16,7 @@ export default function Articles() {
         console.log(articleData);
         setArticles(articleData);
       });
-  },[]);
+  }, []);
   return (
     <>
       <TopBar />
@@ -30,7 +30,7 @@ export default function Articles() {
       <div class='courses-content'>
         <div class='container'>
           <div class='row'>
-            {shownArticles.map((article) => (
+            {shownArticles.filter(article => article.publish === 1).map((article) => (
               <div className='col-4'>
                 <LastArticleBox {...article} />
               </div>

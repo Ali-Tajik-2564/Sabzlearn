@@ -86,6 +86,36 @@ export default function Offs() {
             })
 
     }
+    const deleteOffCode = (offID) => {
+        swal({
+            title: "ایا از حذف خود اطمینان دارید؟"
+            , icon: "warning"
+            , buttons: [" نه", "اره"]
+        })
+            .then(result => {
+                if (result) {
+                    fetch(`http://localhost:4000/v1/offs/${offID}`, {
+                        method: "DELETE"
+                        , headers: {
+                            "Authorization": `Bearer ${localStorageData}`
+                        }
+                    })
+                        .then(res => {
+                            res.json()
+                            if (res.ok) {
+                                swal({
+                                    title: "حذف با موفقیت انجام شد"
+                                    , icon: "success"
+                                    , buttons: "ok"
+                                })
+                                    .then(() => {
+                                        getAllOffs()
+                                    })
+                            }
+                        })
+                }
+            })
+    }
     return (
         <>
             <div class="container-fluid" id="home-content">
@@ -195,7 +225,7 @@ export default function Offs() {
                                 <td>{off.course}</td>
 
                                 <td>
-                                    <button type="button" class="btn btn-danger delete-btn"  >
+                                    <button type="button" class="btn btn-danger delete-btn" onClick={() => deleteOffCode(off._id)}  >
                                         حذف
                                     </button>
                                 </td>

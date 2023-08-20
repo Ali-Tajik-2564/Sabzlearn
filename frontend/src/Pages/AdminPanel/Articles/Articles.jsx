@@ -5,6 +5,7 @@ import { useForm } from "./../../../hooks/useForm";
 import Input from "./../../../Components/Form/Input/Input";
 import { minValidator } from "./../../../Validator/rules";
 import Editor from '../../../Components/Editor/Editor';
+import { Link } from "react-router-dom";
 import "./Articles.css"
 export default function AdminArticles() {
     const localStorageData = JSON.parse(localStorage.getItem("user"))
@@ -112,6 +113,37 @@ export default function AdminArticles() {
                 }
             })
     }
+    const saveArticleAsDraft = (event) => {
+        event.preventDefault()
+        let fromArticleData = new FormData()
+        fromArticleData.append("title", formState.inputs.title.value)
+        fromArticleData.append("description", formState.inputs.description.value)
+        fromArticleData.append("shortName", formState.inputs.shortName.value)
+        fromArticleData.append("cover", articleCover)
+        fromArticleData.append("categoryID", articleCategory)
+        fromArticleData.append("body", articleBody)
+
+        fetch("http://localhost:4000/v1/articles/draft", {
+            method: "POST",
+            headers: {
+
+                "Authorization": `Bearer ${localStorageData}`
+            }
+            , body: fromArticleData
+        })
+            .then(res => {
+                if (res.ok) {
+                    swal({
+                        title: "مقاله با موفقیت پیش نویس شد"
+                        , icon: "success"
+                        , buttons: "ok"
+                    })
+                        .then(() => {
+                            getAllArticles()
+                        })
+                }
+            })
+    }
     return (
         <>
             <div class="container-fluid" id="home-content">
@@ -202,7 +234,8 @@ export default function AdminArticles() {
                         <div class="col-12">
                             <div class="bottom-form">
                                 <div class="submit-btn">
-                                    <input type="submit" value="افزودن" onClick={() => articleCreator(event)} />
+                                    <input type="submit" value="افزودن" className='m-3' onClick={articleCreator} />
+                                    <input type="submit" value="ثبت پیش نویس" className='m-3' onClick={saveArticleAsDraft} />
                                 </div>
                             </div>
                         </div>
@@ -219,6 +252,8 @@ export default function AdminArticles() {
                             <th>عنوان</th>
                             <th>لینک </th>
                             <th>نویسنده</th>
+                            <th>وضعیت</th>
+                            <th>مشاهده</th>
                             <th>ویرایش</th>
                             <th>حذف</th>
                         </tr>
@@ -232,7 +267,21 @@ export default function AdminArticles() {
                                 <td>{article.title}</td>
                                 <td>{article.shortName}</td>
                                 <td>{article.creator.username}</td>
+                                <td>{article.publish === 1 ? "منتشر شده" : "پیش نویس شده"}</td>
 
+                                {
+                                    article.publish === 1 ? (
+                                        <i className='fa fa-check'></i>
+                                    ) : (
+                                        <>
+                                            <td>
+                                                <Link to={`draft/${article.shortName}`} class="btn btn-primary edit-btn" >
+                                                    مشاهده
+                                                </Link>
+                                            </td>
+                                        </>
+                                    )
+                                }
                                 <td>
                                     <button type="button" class="btn btn-primary edit-btn" >
                                         ویرایش

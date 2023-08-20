@@ -5,7 +5,7 @@ export default function Editor({ value, setValue }) {
     return (
 
         <div className="App">
-            <h2>Using CKEditor&nbsp;5 build in React</h2>
+            {/* <h2>Using CKEditor&nbsp;5 build in React</h2> */}
             <CKEditor
                 editor={ClassicEditor}
                 data={value}
