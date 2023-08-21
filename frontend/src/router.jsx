@@ -20,6 +20,7 @@ import SessionInfo from "./Pages/SessionInfo/SessionInfo";
 import AdminComments from "./Pages/AdminPanel/AdminComments/AdminComments";
 import Offs from "./Pages/AdminPanel/Offs/Offs";
 import Draft from "./Pages/AdminPanel/Articles/Draft";
+import PAdmin from "./Pages/AdminPanel/Index/PAdmin";
 const routes = [
   { path: "/", element: <Index /> },
   { path: "/category/:categoryName/:page", element: <Category /> },
@@ -34,6 +35,7 @@ const routes = [
   { path: "/:shortName/:sessionID", element: <SessionInfo /> },
   {
     path: "/admin-panel/*", element: <AdminIndex />, children: [
+      { path: "", element: <PAdmin /> },
       { path: "user/:page", element: <User /> },
       { path: "menus", element: <Menus /> },
       { path: "admin-articles", element: <AdminArticles /> },
