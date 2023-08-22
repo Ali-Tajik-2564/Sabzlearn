@@ -20,6 +20,9 @@ export default function CourseInfo() {
   const [updateAt, setUpdateAt] = useState("");
   const [teacherInfo, setTeacherInfo] = useState("");
   useEffect(() => {
+    getAllCourses()
+  }, []);
+  function getAllCourses() {
     fetch(`http://localhost:4000/v1/courses/${courseName}`, {
       headers: {
         Authorization: `Bearer ${LocalStorageToken === "" ? null : LocalStorageToken
@@ -36,7 +39,7 @@ export default function CourseInfo() {
         setTeacherInfo(courseData.creator);
         console.log(courseData);
       });
-  }, []);
+  }
   const onSubmitHandler = (enteredComment) => {
     fetch("http://localhost:4000/v1/comments", {
       method: "POST",
@@ -60,6 +63,78 @@ export default function CourseInfo() {
         });
       });
   };
+  const registerToCourse = (course) => {
+    if (course.price === 0) {
+      swal({
+        title: "ایا از ثبت نام خود اطمینان دارید؟"
+        , icon: "warning"
+        , buttons: ["نه", "اره"]
+
+      })
+        .then(result => {
+          if (result)
+            fetch(`http://localhost:4000/v1/courses/${course._id}/register`, {
+              method: "POST"
+              , headers: {
+                "Authorization": `Bearer ${LocalStorageToken}`
+              }
+            })
+              .then(res => {
+                res.json()
+                if (res.ok) {
+                  swal({
+                    title: "با موفقیت در دوره ثبت نام شدید"
+                    , icon: "success"
+                    , buttons: "ok"
+                  })
+                    .then(() => {
+                      getAllCourses()
+                    })
+                }
+              })
+        })
+    } else {
+      swal({
+        title: "ایا از ثبت نام خود اطمینان دارید؟"
+        , icon: "warning"
+        , buttons: ["نه", "اره"]
+
+      })
+        .then(result => {
+          if (result) {
+            swal({
+              title: "درصورت وجود کد تخفیف ان را وارد کنید"
+              , content: "input"
+              , buttons: ["ثبت نام با کد تخفیف", "ثبت نام با کد تخفیف"]
+            })
+              .then(result => {
+                if (result === null) {
+                  fetch(`http://localhost:4000/v1/courses/${course._id}/register`, {
+                    method: "POST"
+                    , headers: {
+                      "Authorization": `Bearer ${LocalStorageToken}`
+                    }
+                  })
+                    .then(res => {
+                      res.json()
+                      if (res.ok) {
+                        swal({
+                          title: "با موفقیت در دوره ثبت نام شدید"
+                          , icon: "success"
+                          , buttons: "ok"
+                        })
+                          .then(() => {
+                            getAllCourses()
+                          })
+                      }
+                    })
+                }
+              })
+          }
+        })
+    }
+
+  }
   console.log(teacherInfo);
   return (
     <div>
@@ -328,7 +403,7 @@ export default function CourseInfo() {
                       </span>
                     ) : (
                       <span class='course-info__register-title'>
-                        <i class='fas fa-graduation-cap course-info__register-icon'></i>
+                        <i class='fas fa-graduation-cap course-info__register-icon' onClick={() => registerToCourse(courseDetail)}></i>
                         ثبت نام کنید
                       </span>
                     )}
