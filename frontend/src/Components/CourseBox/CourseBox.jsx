@@ -29,31 +29,24 @@ export default function CourseBox(props) {
             </a>
           </div>
           <div class='course-box__rating'>
-            <img
-              src='/images/svgs/star.svg'
-              alt='rating'
-              class='course-box__star'
-            />
-            <img
-              src='/images/svgs/star_fill.svg'
-              alt='rating'
-              class='course-box__star'
-            />
-            <img
-              src='/images/svgs/star_fill.svg'
-              alt='rating'
-              class='course-box__star'
-            />
-            <img
-              src='/images/svgs/star_fill.svg'
-              alt='rating'
-              class='course-box__star'
-            />
-            <img
-              src='/images/svgs/star_fill.svg'
-              alt='rating'
-              class='course-box__star'
-            />
+            {
+              Array(5 - props.courseAverageScore).fill(0).map(item => {
+                <img
+                  src='/images/svgs/star.svg'
+                  alt="score"
+                  class='course-box__star'
+                />
+              })
+            }
+            {
+              Array(props.courseAverageScore).fill(0).map(item => {
+                <img
+                  src='/images/svgs/star_fill.svg'
+                  alt="score"
+                  class='course-box__star'
+                />
+              })
+            }
           </div>
         </div>
 
@@ -76,6 +69,6 @@ export default function CourseBox(props) {
           <i class='fas fa-arrow-left course-box__footer-icon'></i>
         </Link>
       </div>
-    </div>
+    </div >
   );
 }
