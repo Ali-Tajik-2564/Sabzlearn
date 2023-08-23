@@ -60,7 +60,7 @@ export default function CourseBox(props) {
         <div class='course-box__status'>
           <div class='course-box__users'>
             <i class='fas fa-users course-box__users-icon'></i>
-            <span class='course-box__users-text'>500</span>
+            <span class='course-box__users-text'>{props.registers}</span>
           </div>
           <span class='course-box__price'>
             {props.price === 0 ? "رایگان" : props.price}

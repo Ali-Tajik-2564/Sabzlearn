@@ -132,6 +132,7 @@ export default function AdminComments() {
             <th>عنوان</th>
             <th>دوره</th>
             <th>متن کامنت</th>
+            <th>امتیاز </th>
             <th>قبول کردن</th>
             <th>جواب دادن</th>
             <th>رد کردن</th>
@@ -144,6 +145,24 @@ export default function AdminComments() {
               <td className={comment.answer === 1 ? "answer" : "no-answer"}>{index + 1}</td>
               <td>{comment.creator ? comment.creator.name : "?"}</td>
               <td>{comment.course}</td>
+              <td>{
+                Array(5 - comment.score).fill(0).map(item => {
+                  <img
+                    src='/images/svgs/star.svg'
+                    alt="score"
+                    class='course-box__star'
+                  />
+                })
+              }</td>
+              <td>{
+                Array(comment.score).fill(0).map(item => {
+                  <img
+                    src='/images/svgs/star_fill.svg'
+                    alt="score"
+                    class='course-box__star'
+                  />
+                })
+              }</td>
 
               <td>
                 <button type="button" class="btn btn-primary edit-btn" onClick={() => watchComment(comment.body)}>

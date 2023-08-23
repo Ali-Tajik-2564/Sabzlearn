@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 export default function Comment({ comments, onSubmit }) {
   const authContext = useContext(AuthContext);
   const [enteredComment, setEnteredComment] = useState("");
+  const [scoreComment, setScoreComment] = useState("-1");
 
   const commentChangeHandler = (event) => {
     setEnteredComment(event.target.value);
@@ -123,11 +124,21 @@ export default function Comment({ comments, onSubmit }) {
             <div class='comments__respond'>
               <div class='comments__score'>
                 <span class='comments__score-title'>امتیاز شما</span>
-                <div class='comments__score-input'>
+                {/* <div class='comments__score-input'>
                   <span class='comments__score-input-text'>
                     امتیاز خود را انتخاب کنید
                   </span>
                   <i class='fas fa-angle-down	 comments__input-icon'></i>
+                </div> */}
+                <div className="col-12">
+                  <select className="form-select form-control font-bold" onChange={event => setScoreComment(event.target.value
+                  )}>امتیاز خود را وارد نمایید</select>
+                  <option value="-1" className="form-control">امتیاز خود را وارد نمایید</option>
+                  <option value="5" className="form-control">عالی</option>
+                  <option value="4" className="form-control">خیلی خوب</option>
+                  <option value="3" className="form-control">خوب</option>
+                  <option value="2" className="form-control">متوسط</option>
+                  <option value="1" className="form-control">ضغیف</option>
                 </div>
               </div>
               <div class='comments__respond-content'>
@@ -141,7 +152,7 @@ export default function Comment({ comments, onSubmit }) {
               <button
                 type='submit'
                 class='comments__respond-btn'
-                onClick={() => onSubmit(enteredComment)}>
+                onClick={() => onSubmit(enteredComment, scoreComment)}>
                 ارسال
               </button>
             </div>

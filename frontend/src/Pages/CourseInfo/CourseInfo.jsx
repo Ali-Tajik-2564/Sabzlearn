@@ -40,7 +40,7 @@ export default function CourseInfo() {
         console.log(courseData);
       });
   }
-  const onSubmitHandler = (enteredComment) => {
+  const onSubmitHandler = (enteredComment, score) => {
     fetch("http://localhost:4000/v1/comments", {
       method: "POST",
       headers: {
@@ -50,7 +50,7 @@ export default function CourseInfo() {
       body: JSON.stringify({
         body: enteredComment,
         courseShortName: courseName,
-        score: 5,
+        score: score
       }),
     })
       .then((res) => console.log(res))
