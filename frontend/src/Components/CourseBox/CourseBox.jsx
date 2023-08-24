@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function CourseBox(props) {
   const [isShowImg, setIsShowImg] = useState(false);
+  console.log(props);
   return (
     <div class='course-box'>
       <Link to={`/course-info/${props.shortName}`}>

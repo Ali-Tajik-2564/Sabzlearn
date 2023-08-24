@@ -21,7 +21,10 @@ import AdminComments from "./Pages/AdminPanel/AdminComments/AdminComments";
 import Offs from "./Pages/AdminPanel/Offs/Offs";
 import Draft from "./Pages/AdminPanel/Articles/Draft";
 import PAdmin from "./Pages/AdminPanel/Index/PAdmin";
+import UserIndex from "./Pages/UserPanel/UserIndex/UserIndex";
+import MainIndex from "./Pages/UserPanel/mainIndex/mainIndex";
 const routes = [
+
   { path: "/", element: <Index /> },
   { path: "/category/:categoryName/:page", element: <Category /> },
   { path: "/contact", element: <Contact /> },
@@ -46,6 +49,15 @@ const routes = [
       { path: "sessions", element: <Sessions /> },
       { path: "comment", element: <AdminComments /> },
       { path: "off", element: <Offs /> },
+    ]
+  },
+  {
+    path: "/my-account", element: <UserIndex />, children: [
+
+      { path: "", element: <MainIndex /> },
+
+
+
     ]
   },
 ];

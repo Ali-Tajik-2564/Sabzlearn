@@ -1,0 +1,395 @@
+:root {
+  --primary-font: "IranSans";
+  --primary-color: #2bce56;
+  --white-color: #fff;
+  --dark-color: #464749;
+}
+/* ============================== Reset Style ============================== */
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  /* scroll-behavior: smooth; */
+}
+*,
+*:after,
+*:before {
+  outline: none;
+  box-sizing: inherit;
+}
+a {
+  text-decoration: none;
+  transition: all 400ms ease;
+  color: var(--dark-color);
+}
+a:hover {
+  color: #1e83f0;
+}
+i {
+  user-select: none;
+}
+body {
+  line-height: 1.6;
+  font-size: 1.6rem;
+  font-family: var(--primary-font);
+}
+/* ============================== Reset Style ============================== */
+.header {
+  position: relative;
+  box-shadow: 0 0.125rem 0.55rem rgb(0, 0, 0, 0.08);
+}
+/* ============================== Top-Bar Style ============================== */
+.top-bar {
+  background-color: #f0f2f7;
+  color: var(--dark-color);
+  padding: 2rem 0;
+}
+
+.top-bar__content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+}
+.top-bar__right {
+  display: flex;
+}
+.top-bar__menu {
+  display: flex;
+}
+.top-bar__link {
+  color: #464749;
+  transition: all 400ms ease;
+  font-size: 1.5rem;
+  padding: 0 1rem;
+}
+
+.top-bar__left {
+  display: flex;
+}
+.top-bar__email,
+.top-bar__phone {
+  display: flex;
+  align-items: center;
+}
+.top-bar__email-text,
+.top-bar__phone-text {
+  padding: 0 0.8rem;
+}
+.top-bar__phone-icon,
+.top-bar__email-icon {
+  color: var(--primary-color);
+  font-size: 2rem;
+}
+/* ============================== Top-Bar Style ============================== */
+
+/* ============================== Main-Header Style ============================== */
+.main-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 1.5rem;
+}
+.main-header__right {
+  display: flex;
+}
+.main-header__menu {
+  display: flex;
+}
+.main-header__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+  position: relative;
+}
+.main-header__link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #7f8187;
+}
+.main-header__link:hover {
+  color: #7f8187;
+}
+.main-header__link-icon {
+  margin-right: 1rem;
+}
+.main-header__left {
+  display: flex;
+  align-items: center;
+}
+.main-header__search-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4.3rem;
+  height: 4.3rem;
+  border-radius: 0.5rem;
+  background-color: var(--primary-color);
+}
+.main-header__search-icon {
+  color: var(--white-color);
+  font-size: 2.2rem;
+}
+.main-header__cart-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4.3rem;
+  height: 4.3rem;
+  border-radius: 0.5rem;
+  background-color: #f0f2f7;
+  margin-right: 1rem;
+}
+.main-header__cart-btn:hover .main-header__cart-icon {
+  color: #1e83f0;
+}
+.main-header__cart-icon {
+  color: var(--dark-color);
+  font-size: 2.2rem;
+  transition: all 400ms ease;
+}
+.main-header__profile {
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  height: 4.3rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 0.5rem;
+  margin-right: 1rem;
+  transition: all 400ms ease;
+  color: var(--primary-color);
+}
+.main-header__profile:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+/* ============================== Main-Header Style ============================== */
+
+/* ============================== Drop-Down Desktop Style ============================== */
+.main-header__dropdown {
+  position: absolute;
+  top: 5.5rem;
+  left: 0;
+  right: 0;
+  background-color: var(--white-color);
+  transition: all 200ms ease-in-out;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 0.5rem;
+  width: 24rem;
+  z-index: 1;
+  padding: 1rem 0;
+  border-bottom: 3px solid var(--primary-color);
+  visibility: hidden;
+  opacity: 0;
+}
+.main-header__item:hover .main-header__dropdown {
+  visibility: visible;
+  opacity: 1;
+  top: 6.5rem;
+}
+.main-header__dropdown-link {
+  display: block;
+  padding: 0.6rem 2rem;
+  font-size: 1.4rem;
+  color: var(--dark-color);
+  transition: all 400ms ease;
+}
+.main-header__dropdown-link:hover {
+  color: #1e83f0;
+}
+/* ============================== Drop-Down Desktop Style ============================== */
+
+/* ============================== Content Header Style ============================== */
+
+.content {
+  display: block;
+}
+
+.content-header {
+  border-top: 2px solid #2bce56;
+  border-bottom: 2px solid #2bce56;
+  padding: 1.7rem 0;
+}
+.content-header__title {
+  display: block;
+  font-weight: bold;
+  font-size: 2.3rem;
+}
+.content-header__subtitle {
+  font-size: 1.3rem;
+}
+/* ============================== Content Header Style ============================== */
+
+/* ============================== Content Sidebar Style ============================== */
+.content-main {
+  margin: 3rem 0;
+}
+
+.sidebar__name {
+  color: var(--dark-color);
+  font-size: 1.7rem;
+}
+.sidebar__list {
+  margin-top: 0.7rem;
+}
+.sidebar__link {
+  display: block;
+  padding: 1rem 0;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+/* ============================== Content Sidebar Style ============================== */
+
+/* ============================== Content Main Style ============================== */
+.main {
+  border-right: 2px solid #2bce56;
+  padding-right: 3rem;
+}
+.main__title-text {
+  font-size: 1.7rem;
+}
+.main__title-name {
+  color: #2bce56;
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+.main__title-link {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.main__desc {
+  margin: 2.3rem 0 2rem 0;
+}
+.main__link {
+  display: block;
+  text-align: center;
+  padding: 1.5rem 0;
+  border: 1px solid #2bce56;
+  border-radius: 0.3rem;
+  margin-bottom: 1.5rem;
+  transition: all 400ms ease;
+}
+.main__link:hover {
+  background-color: #2bce56;
+  color: var(--white-color);
+}
+/* ============================== Content Main Style ============================== */
+
+/* ============================== Footer Style ============================== */
+.footer-widgets {
+  background-color: #f0f2f7;
+  border-radius: 1rem;
+  padding: 4rem 3.5rem;
+  margin-bottom: 5rem;
+  position: relative;
+}
+.footer-widgets::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+  width: 50rem;
+  height: 4rem;
+  background-color: var(--primary-color);
+  border-radius: 5rem;
+  bottom: -1.5rem;
+  z-index: -1;
+}
+.footer-widgets__title {
+  display: block;
+  font-size: 1.7rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  position: relative;
+}
+.footer-widgets__title::before {
+  content: "";
+  position: absolute;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: var(--primary-color);
+  border-radius: 0.7rem;
+  opacity: 0.3;
+  transform: rotate(45deg);
+  right: 1rem;
+}
+.footer-widgets__text {
+  color: #7d7e7f;
+}
+.footer-widgets__links {
+  display: flex;
+  flex-direction: column;
+}
+.footer-widgets__link {
+  display: block;
+  margin-bottom: 1rem;
+}
+.footer__copyright {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f2f7;
+  padding: 3rem 0;
+}
+.footer__copyright-text {
+  color: var(--dark-color);
+}
+/* ============================== Footer Style ============================== */
+
+/* ============================== Helper Class ============================== */
+.title::before {
+  content: "";
+  position: absolute;
+  right: -1rem;
+  width: 0.4rem;
+  height: 4.4rem;
+  border-radius: 5rem;
+  background-color: var(--primary-color);
+  transform: rotate(8deg);
+}
+.title::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 250px;
+  height: 60%;
+  background-color: rgba(43, 206, 86, 0.2);
+}
+.title {
+  font-size: 2.3rem;
+  color: #444446;
+  font-weight: bold;
+  line-height: 1.2;
+  position: relative;
+}
+/* ============================== Helper Class ============================== */
+
+/* ============================== Slider Style ============================== */
+.swiper-container {
+  height: 36rem;
+  cursor: grab;
+  overflow: hidden;
+}
+.swiper-pagination {
+  position: absolute;
+  bottom: -4rem !important;
+}
+.swiper-pagination-bullet {
+  width: 13px;
+  height: 13px;
+  transition: all 400ms ease;
+  opacity: 1 !important;
+  background: transparent;
+  border: 2px solid var(--primary-color);
+}
+.swiper-pagination-bullet-active {
+  background-color: var(--primary-color);
+  transition: all 400ms ease;
+  opacity: 1 !important;
+  width: 35px !important;
+  border-radius: 10px;
+}
+/* ============================== Slider Style ============================== */

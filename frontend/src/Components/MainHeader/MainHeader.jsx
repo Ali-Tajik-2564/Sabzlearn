@@ -12,7 +12,7 @@ export default function MainHeader() {
     fetch("http://localhost:4000/v1/menus")
       .then((res) => res.json())
       .then((data) => setAllMenus(data));
-  },[]);
+  }, []);
   return (
     <div>
       <div class='main-header'>
@@ -69,7 +69,7 @@ export default function MainHeader() {
                 <i class='fas fa-shopping-cart main-header__cart-icon'></i>
               </a>
               {authContext.isLoggedIn ? (
-                <Link to='#' class='main-header__profile'>
+                <Link to='/my-account' class='main-header__profile'>
                   <span class='main-header__profile-text'>
                     {authContext.userInfo.name}
                   </span>
