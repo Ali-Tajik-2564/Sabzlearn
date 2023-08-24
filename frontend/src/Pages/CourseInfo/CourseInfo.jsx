@@ -7,7 +7,7 @@ import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 import CourseInfoBox from "../../Components/CourseInfoBox/CourseInfoBox";
 import Comment from "../../Components/Comment/Comment";
 import Accordion from "react-bootstrap/Accordion";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import swal from "sweetalert";
 export default function CourseInfo() {
   const { courseName } = useParams();
@@ -19,8 +19,10 @@ export default function CourseInfo() {
   const [createAt, setCreateAt] = useState("");
   const [updateAt, setUpdateAt] = useState("");
   const [teacherInfo, setTeacherInfo] = useState("");
+  const [relatedCourse, setRelatedCourse] = useState([]);
   useEffect(() => {
     getAllCourses()
+    getRelatedCourses()
   }, []);
   function getAllCourses() {
     fetch(`http://localhost:4000/v1/courses/${courseName}`, {
@@ -28,7 +30,11 @@ export default function CourseInfo() {
         Authorization: `Bearer ${LocalStorageToken === "" ? null : LocalStorageToken
           }}`,
       },
+
+
+
     })
+
       .then((res) => res.json())
       .then((courseData) => {
         setComments(courseData.comments);
@@ -39,6 +45,12 @@ export default function CourseInfo() {
         setTeacherInfo(courseData.creator);
         console.log(courseData);
       });
+  }
+  function getRelatedCourses() {
+    fetch(`http://localhost:4000/v1/courses/related/${courseName}`)
+      .then(res => res.json())
+      .then(allData => setRelatedCourse(allData))
+
   }
   const onSubmitHandler = (enteredComment, score) => {
     fetch("http://localhost:4000/v1/comments", {
@@ -519,59 +531,70 @@ export default function CourseInfo() {
                     کلیک کنید
                   </span>
                 </div>
-                <div class='course-info'>
-                  <span class='course-info__courses-title'>دوره های مرتبط</span>
-                  <ul class='course-info__courses-list'>
-                    <li class='course-info__courses-list-item'>
-                      <a href='#' class='course-info__courses-link'>
-                        <img
-                          src='/images/courses/js_project.png'
-                          alt='Course Cover'
-                          class='course-info__courses-img'
-                        />
-                        <span class='course-info__courses-text'>
-                          پروژه های تخصصی با جاوا اسکریپت
-                        </span>
-                      </a>
-                    </li>
-                    <li class='course-info__courses-list-item'>
-                      <a href='#' class='course-info__courses-link'>
-                        <img
-                          src='/images/courses/fareelancer.png'
-                          alt='Course Cover'
-                          class='course-info__courses-img'
-                        />
-                        <span class='course-info__courses-text'>
-                          تعیین قیمت پروژه های فریلنسری
-                        </span>
-                      </a>
-                    </li>
-                    <li class='course-info__courses-list-item'>
-                      <a href='#' class='course-info__courses-link'>
-                        <img
-                          src='/images/courses/nodejs.png'
-                          alt='Course Cover'
-                          class='course-info__courses-img'
-                        />
-                        <span class='course-info__courses-text'>
-                          دوره Api نویسی
-                        </span>
-                      </a>
-                    </li>
-                    <li class='course-info__courses-list-item'>
-                      <a href='#' class='course-info__courses-link'>
-                        <img
-                          src='/images/courses/jango.png'
-                          alt='Course Cover'
-                          class='course-info__courses-img'
-                        />
-                        <span class='course-info__courses-text'>
-                          متخصص جنگو
-                        </span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+                {
+                  relatedCourse.length !== 0 && (
+
+                    <div class='course-info'>
+
+                      <span class='course-info__courses-title'>دوره های مرتبط</span>
+                      <ul class='course-info__courses-list'>
+                        {
+                          relatedCourse.map(course => (
+
+                            <li class='course-info__courses-list-item'>
+                              <Link to={`/course-info/${course.shortName}`} class='course-info__courses-link'>
+                                <img
+                                  src={`http://localhost:4000/v1/course/cover/${course.cover}`}
+                                  alt='Course Cover'
+                                  class='course-info__courses-img'
+                                />
+                                <span class='course-info__courses-text'>
+                                  {course.name}
+                                </span>
+                              </Link>
+                            </li>
+                          ))
+                        }
+                        <li class='course-info__courses-list-item'>
+                          <a href='#' class='course-info__courses-link'>
+                            <img
+                              src='/images/courses/fareelancer.png'
+                              alt='Course Cover'
+                              class='course-info__courses-img'
+                            />
+                            <span class='course-info__courses-text'>
+                              تعیین قیمت پروژه های فریلنسری
+                            </span>
+                          </a>
+                        </li>
+                        <li class='course-info__courses-list-item'>
+                          <a href='#' class='course-info__courses-link'>
+                            <img
+                              src='/images/courses/nodejs.png'
+                              alt='Course Cover'
+                              class='course-info__courses-img'
+                            />
+                            <span class='course-info__courses-text'>
+                              دوره Api نویسی
+                            </span>
+                          </a>
+                        </li>
+                        <li class='course-info__courses-list-item'>
+                          <a href='#' class='course-info__courses-link'>
+                            <img
+                              src='/images/courses/jango.png'
+                              alt='Course Cover'
+                              class='course-info__courses-img'
+                            />
+                            <span class='course-info__courses-text'>
+                              متخصص جنگو
+                            </span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  )
+                }
               </div>
             </div>
           </div>
