@@ -3,6 +3,7 @@ import swal from "sweetalert";
 import { useNavigate } from "react-router";
 import AuthContext from "../../Context/AuthContext";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 export default function UserSidebar() {
     const authContext = useContext(AuthContext)
     const navigate = useNavigate()
@@ -33,34 +34,34 @@ export default function UserSidebar() {
                 <span class="sidebar__name">محمدامین سعیدی راد</span>
                 <ul class="sidebar__list">
                     <li class="sidebar__item">
-                        <a class="sidebar__link" href="#">
+                        <Link class="sidebar__link" to="">
                             پیشخوان
-                        </a>
+                        </Link>
                     </li>
                     <li class="sidebar__item">
-                        <a class="sidebar__link" href="#">
-                            سفارش
-                        </a>
+                        <Link class="sidebar__link" to="orders/1">
+                            سفارش ها
+                        </Link>
                     </li>
                     <li class="sidebar__item">
-                        <a class="sidebar__link" href="#">
+                        <Link class="sidebar__link" href="#">
                             کیف پول من
-                        </a>
+                        </Link>
                     </li>
                     <li class="sidebar__item">
-                        <a class="sidebar__link" href="#">
+                        <Link class="sidebar__link" href="#">
                             جزئیات حساب کاربری
-                        </a>
+                        </Link>
                     </li>
                     <li class="sidebar__item">
-                        <a class="sidebar__link" href="#">
+                        <Link class="sidebar__link" href="#">
                             دوره های خریداری شده
-                        </a>
+                        </Link>
                     </li>
                     <li class="sidebar__item">
-                        <a class="sidebar__link" href="#">
+                        <Link class="sidebar__link" href="#">
                             تیکت های پشتیبانی
-                        </a>
+                        </Link>
                     </li>
                     <li class="sidebar__item">
                         <a class="sidebar__link" href="#" onClick={event => logout(event)}>

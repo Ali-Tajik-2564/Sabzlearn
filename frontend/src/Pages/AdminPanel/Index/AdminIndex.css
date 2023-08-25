@@ -101,15 +101,15 @@ ul {
 }
 @font-face {
   font-family: "vazir";
-  src: url("./../../fonts/Vazir/Vazir.eot");
-  src: url("./../../fonts/Vazir/Vazir.ttf");
-  src: url("./../../fonts/Vazir/Vazir.woff");
-  src: url("./../../fonts/Vazir/Vazir.woff2");
+  src: url("../../../fonts/IRANSans/IRANSans.ttf");
+  src: url("../../../fonts/IRANSans/IRANSans_Black.ttf");
+  src: url("../../../fonts/IRANSans/IRANSans_Bold.ttf");
+  src: url("../../../fonts/IRANSans/IRANSans_Medium.ttf");
 }
 @font-face {
   font-family: "lalezar";
-  src: url("./../../fonts/Lalezar-Font/OTF/Lalezar-Regular.otf");
-  src: url("./../../fonts/Lalezar-Font/TTF/Lalezar-Regular.ttf");
+  src: url("../../../fonts/IRANSans/IRANSans.ttf");
+  src: url("../../../fonts/IRANSans/IRANSans_Medium.ttf");
 }
 #sidebar {
   background-color: #17203f;

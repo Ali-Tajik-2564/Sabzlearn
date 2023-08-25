@@ -23,6 +23,7 @@ import Draft from "./Pages/AdminPanel/Articles/Draft";
 import PAdmin from "./Pages/AdminPanel/Index/PAdmin";
 import UserIndex from "./Pages/UserPanel/UserIndex/UserIndex";
 import MainIndex from "./Pages/UserPanel/mainIndex/mainIndex";
+import UserOrders from "./Pages/UserPanel/UserOrders/UserOrders";
 const routes = [
 
   { path: "/", element: <Index /> },
@@ -55,6 +56,7 @@ const routes = [
     path: "/my-account", element: <UserIndex />, children: [
 
       { path: "", element: <MainIndex /> },
+      { path: "orders", element: <UserOrders /> },
 
 
 
