@@ -56,7 +56,7 @@ const routes = [
     path: "/my-account", element: <UserIndex />, children: [
 
       { path: "", element: <MainIndex /> },
-      { path: "orders", element: <UserOrders /> },
+      { path: "orders/:pagenumber", element: <UserOrders /> },
 
 
 

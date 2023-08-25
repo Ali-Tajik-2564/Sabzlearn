@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./UserOrders.css"
-import Pagination from "../../Components/Pagination/Pagination";
+import Pagination from '../../../Components/Pagination/Pagination';
 import { useParams } from 'react-router';
 
 export default function UserOrders() {
     const localStorageData = JSON.parse(localStorage.getItem("user"))
     const [allOrders, setAllOrders] = useState([])
     const [shownOrders, setShownOrders] = useState([])
-    const { ordersName } = useParams()
+    const { pagenumber } = useParams()
+    console.log(pagenumber);
     useEffect(() => {
         fetch("http://localhost:4000/v1/orders", {
             headers: {
@@ -57,7 +58,7 @@ export default function UserOrders() {
                     </tbody>
                 </table>
                 <Pagination
-                    pathname={`orders/${ordersName}`}
+                    pathname={`/my-account/orders`}
                     itemCount={3}
                     items={allOrders}
                     setShownCourses={setShownOrders}
