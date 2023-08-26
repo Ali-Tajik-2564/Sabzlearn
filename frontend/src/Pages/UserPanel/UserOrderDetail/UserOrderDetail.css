@@ -1,0 +1,35 @@
+.container {
+  margin: 1rem;
+  padding: 6px;
+}
+.description {
+  font-size: 0.7rem;
+  padding: 4px;
+  color: rgb(121, 121, 121);
+  text-align: left;
+  display: block;
+}
+.tab-detail_title {
+  color: black;
+  font-size: 2rem;
+  display: block;
+  border-bottom: 1px solid rgb(121, 121, 121);
+}
+.tab-detail thead tr td {
+  font-weight: bold;
+  font-size: 1rem;
+  color: darkgray;
+  padding: 3px;
+}
+tab-detail body tr td {
+  font-weight: 300;
+  font-size: medium;
+  color: gray;
+  padding: 3px;
+}
+
+.table-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

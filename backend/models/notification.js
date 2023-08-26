@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-const { seeNotificationValidator } = require("../validators/v1/notification");
 
-const notificationSchema = new mongoose.Schema(
+const schema = new mongoose.Schema(
   {
     msg: {
       type: String,
@@ -13,17 +12,12 @@ const notificationSchema = new mongoose.Schema(
     },
     see: {
       type: Number,
-      default: 0,
+      default: 0
     },
   },
   { timestamps: true }
 );
 
-//* add yup validation method to mongoose statics
-notificationSchema.statics.seeValidation = function (body) {
-  return seeNotificationValidator.validate(body, { abortEarly: false });
-};
-
-const model = mongoose.model("Notification", notificationSchema);
+const model = mongoose.model("Notification", schema);
 
 module.exports = model;

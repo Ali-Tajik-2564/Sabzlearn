@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import "./UserOrders.css"
 import Pagination from '../../../Components/Pagination/Pagination';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export default function UserOrders() {
     const localStorageData = JSON.parse(localStorage.getItem("user"))
@@ -49,9 +50,9 @@ export default function UserOrders() {
                                     {order.price}
                                 </td>
                                 <td class="order__table-body-item">
-                                    <a class="order__table-body-btn" href="#">
+                                    <Link class="order__table-body-btn" to={`detail/${order._id}`}>
                                         نمایش
-                                    </a>
+                                    </Link>
                                 </td>
                             </tr>
                         ))}

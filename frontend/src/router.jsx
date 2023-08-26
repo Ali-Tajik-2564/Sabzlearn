@@ -24,6 +24,8 @@ import PAdmin from "./Pages/AdminPanel/Index/PAdmin";
 import UserIndex from "./Pages/UserPanel/UserIndex/UserIndex";
 import MainIndex from "./Pages/UserPanel/mainIndex/mainIndex";
 import UserOrders from "./Pages/UserPanel/UserOrders/UserOrders";
+import UserOrderDetail from "./Pages/UserPanel/UserOrderDetail/UserOrderDetail";
+import Buy from "./Pages/UserPanel/Buy/Buy";
 const routes = [
 
   { path: "/", element: <Index /> },
@@ -57,6 +59,8 @@ const routes = [
 
       { path: "", element: <MainIndex /> },
       { path: "orders/:pagenumber", element: <UserOrders /> },
+      { path: "orders/detail/:ID", element: <UserOrderDetail /> },
+      { path: "buy", element: <Buy /> },
 
 
 

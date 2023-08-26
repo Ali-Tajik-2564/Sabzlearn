@@ -2,6 +2,7 @@ const express = require("express");
 
 const controller = require("../../controllers/v1/auth");
 const authenticatedMiddleware = require("../../middlewares/authenticated");
+const isAdminMiddleware = require("../../middlewares/isAdmin");
 
 const router = express.Router();
 

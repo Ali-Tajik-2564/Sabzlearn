@@ -1,5 +1,4 @@
 {
-  "homepage": "http://Ali-Tajik-2564.github.io/Sabzlearn",
   "name": "my-app",
   "version": "0.1.0",
   "private": "true",
@@ -8,14 +7,6 @@
     "react-scripts": "^5.0.1",
     "swiper": "^10.0.4",
     "typewriter-effect": "^2.20.1"
-  },
-  "scripts": {
-    "start": " react-scripts start",
-    "build": " react-scripts build",
-    "test": " react-scripts test",
-    "eject": " react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "gh-pages": "^6.0.0"
