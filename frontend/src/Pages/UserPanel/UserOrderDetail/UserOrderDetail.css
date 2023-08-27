@@ -1,35 +1,53 @@
-.container {
-  margin: 1rem;
-  padding: 6px;
-}
 .description {
-  font-size: 0.7rem;
+  font-size: 1.3rem;
   padding: 4px;
   color: rgb(121, 121, 121);
   text-align: left;
   display: block;
+  text-align: right;
+}
+.tab-detail {
+  width: 100%;
+  margin-bottom: 20px;
 }
 .tab-detail_title {
   color: black;
   font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
   display: block;
-  border-bottom: 1px solid rgb(121, 121, 121);
+  border-bottom: 1px solid #2bce56;
 }
 .tab-detail thead tr td {
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 2rem;
   color: darkgray;
   padding: 3px;
 }
-tab-detail body tr td {
+.tab-detail tbody tr td {
   font-weight: 300;
-  font-size: medium;
+  font-size: 1.5rem;
   color: gray;
-  padding: 3px;
+  padding: 7px;
 }
 
 .table-row {
+  width: 100%;
+  border-bottom: 2px solid #2bce56;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.tab-address-title {
+  font-size: 2rem;
+  font-weight: bold;
+
+  margin-bottom: 7px;
+  border-bottom: #2bce56 1px solid;
+  width: 20%;
+}
+.address-list li {
+  padding: 5px;
+  color: darkgray;
+  font-size: 1.5rem;
 }

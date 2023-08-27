@@ -16,7 +16,7 @@ export default function UserOrderDetail() {
     }, [])
     return (
         <>
-            <div className="container">
+            <div className="col-9">
                 <p className="description">سفارش ${ }  در تاریخ ${ }  ثبت شده و در حال حاضر در وضعبت ${ }  است`</p>
                 <h2 className="tab-detail_title">مشخصات سفارش</h2>
                 <table className="tab-detail">

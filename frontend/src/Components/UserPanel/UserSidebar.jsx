@@ -44,22 +44,22 @@ export default function UserSidebar() {
                         </Link>
                     </li>
                     <li class="sidebar__item">
-                        <Link class="sidebar__link" href="#">
+                        <Link class="sidebar__link" to="#">
                             کیف پول من
                         </Link>
                     </li>
                     <li class="sidebar__item">
-                        <Link class="sidebar__link" href="#">
+                        <Link class="sidebar__link" to="#">
                             جزئیات حساب کاربری
                         </Link>
                     </li>
                     <li class="sidebar__item">
-                        <Link class="sidebar__link" href="#">
+                        <Link class="sidebar__link" to="buy">
                             دوره های خریداری شده
                         </Link>
                     </li>
                     <li class="sidebar__item">
-                        <Link class="sidebar__link" href="#">
+                        <Link class="sidebar__link" to="#">
                             تیکت های پشتیبانی
                         </Link>
                     </li>

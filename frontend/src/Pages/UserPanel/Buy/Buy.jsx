@@ -6,7 +6,7 @@ export default function Buy() {
     useEffect(() => {
         fetch(`http://localhost:4000/v1/users/courses/`, {
             headers: {
-                Authorization: `Bearer ${JSON.parse(localStorage.getItem("user")).token
+                Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))
                     }`,
             },
         })
@@ -50,7 +50,7 @@ export default function Buy() {
                                         <a class="main__box-img-link" href="#">
                                             <img
                                                 class="main__box-img img-fluid"
-                                                src="images/courses/js_project.png"
+                                                src={`http://localhost/v1/images/courses/${course.cover}`}
                                             />
                                         </a>
                                     </div>

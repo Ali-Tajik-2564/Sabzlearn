@@ -39,7 +39,7 @@ export default function SessionInfo() {
                                 <ul class="sidebar-topics__list">
                                     {
                                         sessions.map(session => (
-                                            <Link to={`/${courseName}/${session._id}`}>
+                                            <Link to={`/${shortName}/${session._id}`}>
                                                 <li class="sidebar-topics__list-item">
                                                     <div class="sidebar-topics__list-right">
                                                         <i class="sidebar-topics__list-item-icon fa fa-play-circle"></i>
@@ -71,7 +71,7 @@ export default function SessionInfo() {
                                 <a class="episode-header__right-back-link" href="#">
                                     <i class="episode-header__right-back-icon fa fa-angle-right"></i>
                                     <div class="episode-header__right-home">
-                                        <Link class="episode-header__right-home-link" to={`/course-info/${courseName}`}>
+                                        <Link class="episode-header__right-home-link" to={`/course-info/${shortName}`}>
                                             به دوره خانه بروید
                                         </Link>
                                         <i class="episode-header__right-home-icon fa fa-home"></i>

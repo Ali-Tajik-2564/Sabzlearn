@@ -9,7 +9,7 @@ export default function UserOrders() {
     const [allOrders, setAllOrders] = useState([])
     const [shownOrders, setShownOrders] = useState([])
     const { pagenumber } = useParams()
-    console.log(pagenumber);
+    console.log(shownOrders);
     useEffect(() => {
         fetch("http://localhost:4000/v1/orders", {
             headers: {
