@@ -254,7 +254,7 @@ body {
   font-size: 1.5rem;
 }
 .courses-header__link-active {
-  color: #2bce56;
+  color: #4a584e !important;
   font-weight: bold;
 }
 .main__box {
