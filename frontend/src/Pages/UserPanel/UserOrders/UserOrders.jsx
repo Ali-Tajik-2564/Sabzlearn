@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import "./UserOrders.css"
-import Pagination from '../../../Components/Pagination/Pagination';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 
 export default function UserOrders() {
     const localStorageData = JSON.parse(localStorage.getItem("user"))
     const [allOrders, setAllOrders] = useState([])
-    const [shownOrders, setShownOrders] = useState([])
     const { pagenumber } = useParams()
-    console.log(shownOrders);
+    console.log(allOrders);
     useEffect(() => {
         fetch("http://localhost:4000/v1/orders", {
             headers: {
@@ -34,7 +32,7 @@ export default function UserOrders() {
                         </tr>
                     </thead>
                     <tbody class="order__table-body">
-                        {shownOrders.map((order, index) => (
+                        {allOrders.map((order, index) => (
                             <tr class="order__table-body-list">
                                 <td class="order__table-body-item">
                                     <a href="#" class="order__table-body-link">
@@ -50,7 +48,7 @@ export default function UserOrders() {
                                     {order.price}
                                 </td>
                                 <td class="order__table-body-item">
-                                    <Link class="order__table-body-btn" to={`detail/${order._id}`}>
+                                    <Link class="order__table-body-btn" to={`/my-account/orders/detail/${order._id}`}>
                                         نمایش
                                     </Link>
                                 </td>
@@ -58,12 +56,7 @@ export default function UserOrders() {
                         ))}
                     </tbody>
                 </table>
-                <Pagination
-                    pathname={`/my-account/orders`}
-                    itemCount={3}
-                    items={allOrders}
-                    setShownCourses={setShownOrders}
-                />
+
             </div>
         </div>
 

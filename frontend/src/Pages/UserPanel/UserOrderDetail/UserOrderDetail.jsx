@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import "./UserOrderDetail.css"
 import { useParams } from 'react-router'
 export default function UserOrderDetail() {
-    const { userID } = useParams()
+    const { ID } = useParams()
     const [detail, setDetail] = useState()
+    console.log(detail);
     const localStorageData = JSON.parse(localStorage.getItem("user"))
     useState(() => {
-        fetch(`http://localhost:4000/v1/orders/${userID}`, {
+        fetch(`http://localhost:4000/v1/orders/${ID}`, {
             headers: {
                 "Authorization": `Bearer ${localStorageData}`
             }
@@ -17,7 +18,7 @@ export default function UserOrderDetail() {
     return (
         <>
             <div className="col-9">
-                <p className="description">سفارش ${ }  در تاریخ ${ }  ثبت شده و در حال حاضر در وضعبت ${ }  است`</p>
+                <p className="description">سفارش <span>{detail[0]._id}</span>  در تاریخ <span>{detail[0].createdAt.slice(0, 10)}</span>  ثبت شده     است</p>
                 <h2 className="tab-detail_title">مشخصات سفارش</h2>
                 <table className="tab-detail">
                     <thead>
@@ -29,16 +30,16 @@ export default function UserOrderDetail() {
 
                     <tbody>
                         <tr className='table-row'>
-                            <td></td>
-                            <td>تومان</td>
+                            <td>{detail[0].course.name}</td>
+                            <td>{detail[0].course.price}تومان</td>
                         </tr>
                         <tr className='table-row'>
                             <td>جمع کل سبد خرید</td>
-                            <td>تومان</td>
+                            <td>{detail[0].course.price}تومان</td>
                         </tr>
                         <tr className='table-row'>
                             <td>قیمت کل سبد خرید</td>
-                            <td>تومان</td>
+                            <td>{detail[0].course.price}تومان</td>
                         </tr>
                     </tbody>
                 </table>

@@ -59,7 +59,7 @@ export default function UserSidebar() {
                         </Link>
                     </li>
                     <li class="sidebar__item">
-                        <Link class="sidebar__link" to="#">
+                        <Link class="sidebar__link" to="ticket">
                             تیکت های پشتیبانی
                         </Link>
                     </li>
