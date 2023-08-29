@@ -27,6 +27,7 @@ import UserOrders from "./Pages/UserPanel/UserOrders/UserOrders";
 import UserOrderDetail from "./Pages/UserPanel/UserOrderDetail/UserOrderDetail";
 import Buy from "./Pages/UserPanel/Buy/Buy";
 import UserTicket from "./Pages/UserPanel/UserTicket/UserTicket";
+import TicketsInfos from "./Pages/UserPanel/UserTicket/TicketsInfos";
 const routes = [
 
   { path: "/", element: <Index /> },
@@ -62,7 +63,8 @@ const routes = [
       { path: "orders/:pagenumber", element: <UserOrders /> },
       { path: "orders/detail/:ID", element: <UserOrderDetail /> },
       { path: "buy", element: <Buy /> },
-      { path: "ticket", element: <UserTicket /> },
+      { path: "ticket", element: <TicketsInfos /> },
+      { path: "ticket/send-ticket", element: <UserTicket /> },
 
 
 

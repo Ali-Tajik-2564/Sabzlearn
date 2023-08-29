@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import "./UserTicket.css"
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 export default function UserTicket() {
+    const navigate = useNavigate()
+
     const localStorageData = JSON.parse(localStorage.getItem("user"))
     const [departments, setDepartments] = useState([]);
     const [departmentsSubs, setDepartmentsSubs] = useState([]);
     const [useCurse, setUserCurses] = useState([]);
     const [ticketTypeId, setTicketTypeId] = useState("")
+    const [departmentsID, setDepartmentsID] = useState("")
+    const [title, setTitle] = useState("")
+    const [body, setBody] = useState("")
+    const [priority, setPriority] = useState("")
+    const [courseID, setCourseID] = useState("")
     console.log(useCurse);
 
     useEffect(() => {
@@ -30,14 +40,45 @@ export default function UserTicket() {
             .then(res => res.json())
             .then(result => setUserCurses(result))
     }
+    const setTicket = (event) => {
+        event.preventDefault()
+        const ticketsInfo = {
+            departmentID: departmentsID,
+            departmentSubID: ticketTypeId,
+            priority,
+            title,
+            body
+        }
+        fetch("http://localhost:4000/v1/tickets", {
+            method: "POST"
+            , headers: {
+                "Authorization": `Bearer ${localStorageData}`
+                , "Content-Type": "application/json"
+            }
+            , body: JSON.stringify(ticketsInfo)
+        })
+            .then(res => {
+                res.json()
+                if (res.ok) {
+                    swal({
+                        title: "تیکت شما با موفقیت ثبت شد"
+                        , icon: "success"
+                        , buttons: "ok"
+                    })
+                        .then(() => {
+                            navigate("/my-account/ticket")
+                        })
+                }
+            })
+    }
     return (
         <div class="col-9">
             <div class="ticket">
                 <div class="ticket-header">
                     <span class="ticket-header__title">ارسال تیکت جدید</span>
-                    <a class="ticket-header__link" href="#">
+                    <Link class="ticket-header__link" to="/my-account/ticket">
                         همه تیکت ها
-                    </a>
+                    </Link>
                 </div>
                 <form class="ticket-form" action="#">
                     <div class="row">
@@ -48,6 +89,7 @@ export default function UserTicket() {
                                 onChange={(event) => {
                                     getDepartmentsSub(event.target.value)
                                     getUserCourses()
+                                    setDepartmentsID(event.target.value)
                                 }}
                             >
                                 <option class="ticket-form__option">
@@ -71,7 +113,29 @@ export default function UserTicket() {
                         </div>
                         <div class="col-6">
                             <label class="ticket-form__label">عنوان تیکت را وارد کنید:</label>
-                            <input class="ticket-form__input" type="text" />
+                            <input class="ticket-form__input" type="text" onChange={(event) => {
+
+                                setTitle(event.target.value)
+                            }} />
+                        </div>
+
+                        <div class="col-6">
+                            <label class="ticket-form__label">اهمیت را انتخاب کنید:</label>
+                            <select class="ticket-form__select" onChange={(event) => {
+
+                                setPriority(event.target.value)
+                            }}>
+                                <option class="ticket-form__option">
+                                    لطفا یک مورد را انتخاب نمایید.
+                                </option>
+
+
+                                <option value="3" class="ticket-form__option">کم</option>
+                                <option value="2" class="ticket-form__option">متوسط</option>
+                                <option value="1" class="ticket-form__option">بالا</option>
+
+
+                            </select>
                         </div>
 
                         {
@@ -80,7 +144,10 @@ export default function UserTicket() {
 
                                 <div class="col-6">
                                     <label class="ticket-form__label">دوره را انتخاب کنید:</label>
-                                    <select class="ticket-form__select">
+                                    <select class="ticket-form__select" onChange={(event) => {
+
+                                        setCourseID(event.target.value)
+                                    }}>
                                         <option class="ticket-form__option">
                                             لطفا یک مورد را انتخاب نمایید.
                                         </option>
@@ -97,7 +164,10 @@ export default function UserTicket() {
                             <label class="ticket-form__label">
                                 محتوای تیکت را وارد نمایید:
                             </label>
-                            <textarea class="ticket-form__textarea"></textarea>
+                            <textarea class="ticket-form__textarea" onChange={(event) => {
+
+                                setBody(event.target.value)
+                            }}></textarea>
                         </div>
                         <div class="col-12">
                             <div class="ticket-form__file">
@@ -111,7 +181,7 @@ export default function UserTicket() {
                             </div>
                         </div>
                         <div class="col-12">
-                            <button class="ticket-form__btn">
+                            <button class="ticket-form__btn" onClick={setTicket}>
                                 <i class="ticket-form__btn-icon fa fa-paper-plane"></i>
                                 ارسال تیکت
                             </button>
