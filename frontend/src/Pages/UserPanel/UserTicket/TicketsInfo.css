@@ -195,6 +195,9 @@
 .ticket-content__condition-text {
   font-size: 1.3rem;
 }
+.condition-text-not-answer::before {
+  background-color: #f0932b;
+}
 .ticket-content__time {
   font-size: 1.3rem;
 }
