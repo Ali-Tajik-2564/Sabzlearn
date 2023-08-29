@@ -1,15 +1,17 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function TicketBox(props) {
     return (
         <div class="ticket-content">
-            <span class="ticket-content__title">{props.title}</span>
+            <span class="ticket-content__title" >
+                {props.title}</span>
             <div class="ticket-content__box">
                 <div class="ticket-content__right">
                     <div class="ticket-content__right-right">
-                        <a class="ticket-content__link" href="#">
+                        <Link class="ticket-content__link" to={`ticketAnswer/${props._id}`}>
                             {props.departmentSubID}
-                        </a>
+                        </Link>
                         <span class="ticket-content__category">
                             <i class="fa fa-ellipsis-v ticket-content__icon"></i>
                             {props.departmentID}
@@ -35,6 +37,6 @@ export default function TicketBox(props) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }

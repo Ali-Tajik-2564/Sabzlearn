@@ -1,0 +1,158 @@
+/* ============================== Content Main Style ============================== */
+.ticket {
+  border-right: 2px solid #2bce56;
+  padding-right: 3rem;
+}
+.ticket-header {
+  border-bottom: 2px solid #2bce56;
+  display: flex;
+  justify-content: space-between;
+}
+.ticket-header__title {
+  display: block;
+  font-size: 1.4rem;
+  color: var(--dark-color);
+  font-weight: bold;
+}
+.ticket-header__link {
+  display: block;
+  margin: 2.5rem 0 1rem 0;
+  background-color: #2bce56;
+  color: var(--white-color);
+  font-size: 1.3rem;
+  border-radius: 3px;
+  text-align: center;
+  padding: 0.3rem 1rem;
+  max-width: 12rem;
+}
+.ticket-header__link:hover {
+  background-color: #2eb351;
+  color: var(--white-color);
+}
+.ticket-top {
+  padding: 2rem 0;
+  display: flex;
+  align-items: center;
+}
+.ticket-top__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+  background-color: #2bce56;
+  border-radius: 50%;
+}
+.ticket-top__icon {
+  font-size: 2.5rem;
+  color: var(--white-color);
+}
+.ticket-top__left {
+  margin-right: 2rem;
+}
+.ticket-top__title {
+  display: flex;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.ticket-top__text {
+  display: flex;
+  font-size: 1.4rem;
+}
+.ticket-send__header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+.ticket-send__header-right {
+  display: flex;
+}
+.ticket-send__header-mic {
+  margin-left: 2.5rem;
+  position: relative;
+}
+.ticket-send__header-mic::after {
+  content: "";
+  position: absolute;
+  width: 0.2rem;
+  height: 90%;
+  background-color: #7d7e7f;
+  right: 3.7rem;
+}
+.ticket-send__header-icon {
+  font-size: 2rem;
+  color: #7d7e7f;
+}
+.ticket-send__header-text {
+  color: #7d7e7f;
+}
+.ticket-send__header-icon-left {
+  font-size: 2rem;
+  color: #7d7e7f;
+}
+.ticket-send__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 1rem; */
+  margin: 2rem 0;
+  position: relative;
+}
+.ticket-send__title::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #2bce56;
+  z-index: -1;
+}
+.ticket-send__title-text {
+  display: flex;
+  align-items: center;
+  background-color: #2bce56;
+  color: var(--white-color);
+  border-radius: 20px;
+  font-size: 1.4rem;
+  padding: 0.1rem 2.3rem;
+}
+.ticket-send__title-icon {
+  margin-left: 0.3rem;
+}
+.ticket-send__answer-box {
+  background-color: rgba(43, 206, 86, 0.94);
+  color: var(--white-color);
+  font-size: 1.5rem;
+  width: 55rem;
+  border-radius: 2rem 2rem 0 2rem;
+  padding: 2.5rem 1.5rem;
+  margin-bottom: 0.3rem;
+  text-align: justify;
+}
+.ticket-send__answer-span {
+  font-size: 1.4rem;
+  color: #464749;
+  margin-left: 0.8rem;
+  font-weight: bold;
+}
+.ticket-send__answer-user {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.ticket-send__answer-user-box {
+  background-color: rgba(18, 164, 237, 94);
+  color: var(--white-color);
+  font-size: 1.5rem;
+  width: 55rem;
+  border-radius: 2rem 2rem 2rem 0;
+  padding: 2.5rem 1.5rem;
+  margin-bottom: 0.3rem;
+  text-align: justify;
+}
+.ticket-send__answer-user-span {
+  font-size: 1.4rem;
+  color: #464749;
+  margin-right: 0.8rem;
+  font-weight: bold;
+}
+/* ============================== Content Main Style ============================== */

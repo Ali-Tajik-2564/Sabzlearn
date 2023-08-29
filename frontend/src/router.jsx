@@ -28,6 +28,7 @@ import UserOrderDetail from "./Pages/UserPanel/UserOrderDetail/UserOrderDetail";
 import Buy from "./Pages/UserPanel/Buy/Buy";
 import UserTicket from "./Pages/UserPanel/UserTicket/UserTicket";
 import TicketsInfos from "./Pages/UserPanel/UserTicket/TicketsInfos";
+import TIcketAnswer from "./Pages/UserPanel/UserTicket/TIcketAnswer";
 const routes = [
 
   { path: "/", element: <Index /> },
@@ -65,6 +66,7 @@ const routes = [
       { path: "buy", element: <Buy /> },
       { path: "ticket", element: <TicketsInfos /> },
       { path: "ticket/send-ticket", element: <UserTicket /> },
+      { path: "ticket/ticketAnswer/:ID", element: <TIcketAnswer /> },
 
 
 
