@@ -2,6 +2,7 @@ import Index from "./Pages/Index/Index";
 import Category from "./Pages/Category/Category";
 import CourseInfo from "./Pages/CourseInfo/CourseInfo";
 import ArticleInfo from "./Pages/ArticleInfo/ArticleInfo";
+import PrivatePAdmin from "./Components/Private/Private-PAdmin";
 import Courses from "./Pages/Courses/Courses";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
@@ -29,6 +30,8 @@ import Buy from "./Pages/UserPanel/Buy/Buy";
 import UserTicket from "./Pages/UserPanel/UserTicket/UserTicket";
 import TicketsInfos from "./Pages/UserPanel/UserTicket/TicketsInfos";
 import TIcketAnswer from "./Pages/UserPanel/UserTicket/TIcketAnswer";
+import EditAccount from "./Pages/UserPanel/EditAccount/EditAccount";
+import AdminTicket from "./Pages/AdminPanel/AdminTicket/AdminTicket";
 const routes = [
 
   { path: "/", element: <Index /> },
@@ -43,7 +46,7 @@ const routes = [
   { path: "/register", element: <Register /> },
   { path: "/:shortName/:sessionID", element: <SessionInfo /> },
   {
-    path: "/admin-panel/*", element: <AdminIndex />, children: [
+    path: "/admin-panel/*", element: (<PrivatePAdmin><AdminIndex /></PrivatePAdmin>), children: [
       { path: "", element: <PAdmin /> },
       { path: "user/:page", element: <User /> },
       { path: "menus", element: <Menus /> },
@@ -55,6 +58,7 @@ const routes = [
       { path: "sessions", element: <Sessions /> },
       { path: "comment", element: <AdminComments /> },
       { path: "off", element: <Offs /> },
+      { path: "ticket", element: <AdminTicket /> },
     ]
   },
   {
@@ -67,6 +71,7 @@ const routes = [
       { path: "ticket", element: <TicketsInfos /> },
       { path: "ticket/send-ticket", element: <UserTicket /> },
       { path: "ticket/ticketAnswer/:ID", element: <TIcketAnswer /> },
+      { path: "edit-account", element: <EditAccount /> },
 
 
 

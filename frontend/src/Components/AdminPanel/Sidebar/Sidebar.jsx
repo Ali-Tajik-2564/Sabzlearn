@@ -36,7 +36,7 @@ export default function Sidebar() {
             <div class="sidebar-menu">
                 <ul>
                     <li class="active-menu">
-                        <Link to="admin-panel">
+                        <Link to="/admin-panel">
                             <span>صفحه اصلی</span>
                         </Link>
                     </li>
@@ -74,6 +74,11 @@ export default function Sidebar() {
                     <li>
                         <Link to="off">
                             <span>کدهای تخفیف</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="ticket">
+                            <span>تیکت ها</span>
                         </Link>
                     </li>
                     <li>

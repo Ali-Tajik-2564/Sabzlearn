@@ -34,7 +34,7 @@ export default function UserSidebar() {
                 <span class="sidebar__name">محمدامین سعیدی راد</span>
                 <ul class="sidebar__list">
                     <li class="sidebar__item">
-                        <Link class="sidebar__link" to="">
+                        <Link class="sidebar__link" to="/my-account">
                             پیشخوان
                         </Link>
                     </li>
@@ -49,7 +49,7 @@ export default function UserSidebar() {
                         </Link>
                     </li>
                     <li class="sidebar__item">
-                        <Link class="sidebar__link" to="#">
+                        <Link class="sidebar__link" to="edit-account">
                             جزئیات حساب کاربری
                         </Link>
                     </li>

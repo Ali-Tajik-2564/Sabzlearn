@@ -27,7 +27,7 @@ export default function MainIndex() {
                         <UserBox title="سفارش" href="orders/1" />
                         <UserBox title="دوره های خریداری شده" href="buy" />
                         <UserBox title="کیف پول من" href="money" />
-                        <UserBox title="جزئیات حساب کاربری" href="infos" />
+                        <UserBox title="جزئیات حساب کاربری" href="edit-account" />
                         <UserBox title="تیکت های پشتیبانی" href="ticket" />
                     </div>
                 </div>
