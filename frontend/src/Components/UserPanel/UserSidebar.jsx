@@ -43,11 +43,7 @@ export default function UserSidebar() {
                             سفارش ها
                         </Link>
                     </li>
-                    <li class="sidebar__item">
-                        <Link class="sidebar__link" to="#">
-                            کیف پول من
-                        </Link>
-                    </li>
+
                     <li class="sidebar__item">
                         <Link class="sidebar__link" to="edit-account">
                             جزئیات حساب کاربری

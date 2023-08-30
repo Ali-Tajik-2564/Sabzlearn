@@ -46,6 +46,9 @@ export default function User() {
     );
 
     useEffect(() => {
+        getAllUser()
+    }, [shownUsers])
+    function getAllUser() {
         fetch("http://localhost:4000/v1/users", {
             headers: {
                 "Authorization": `Bearer ${localStorageData}`
@@ -57,8 +60,7 @@ export default function User() {
                 console.log(result);
 
             })
-    }, [shownUsers])
-
+    }
     const removeHandler = (userId) => {
         swal({
             title: "ایا از حذف اطمینان دارید؟"
@@ -146,7 +148,52 @@ export default function User() {
 
         })
     };
+    const changeRole = (userID) => {
+        swal({
+            title: "نقش جدید را وارد نمایید (USER & ADMIN)"
+            , content: "input"
+            , buttons: "ok"
+        })
+            .then(value => {
+                if (value.length) {
+                    const newRoleInfo = {
+                        id: userID
+                        , role: value
+                    }
+                    fetch("http://localhost:4000/v1/users/role", {
+                        method: "PUT"
+                        , headers: {
+                            "Authorization": `Bearer ${localStorageData}`
 
+                        }
+                        , body: JSON.stringify(newRoleInfo)
+                    })
+                        .then(res => {
+                            if (res.ok) {
+                                swal({
+                                    title: "تغییر نقش با موفقیت انجام شد"
+                                    , icon: "success"
+                                    , buttons: "ok"
+                                })
+                                    .then(() => {
+                                        getAllUser()
+                                    })
+                            } else {
+                                swal({
+                                    title: "تغییر نقش با موفقیت انجام نشد (نقش را اشتباه وارد کردید)"
+                                    , icon: "error"
+                                    , buttons: "ok"
+                                })
+                                    .then(() => {
+                                        getAllUser()
+                                    })
+                                console.log("res", res.json());
+                            }
+                            res.json()
+                        })
+                }
+            })
+    }
     return (
         <>
             <div class="home-content-edit">
@@ -271,7 +318,8 @@ export default function User() {
                             <th>شماره</th>
                             <th>ایمیل</th>
                             {/* <th>رمز عبور</th> */}
-                            <th>ویرایش</th>
+                            <th>نقش</th>
+                            <th>تغییر نقش</th>
                             <th>حذف</th>
                             <th>بن</th>
                         </tr>
@@ -286,12 +334,14 @@ export default function User() {
                                 <td>{user.name}</td>
                                 <td>{user.phone}</td>
                                 <td>{user.email}</td>
+                                <td>{user.role}</td>
                                 {/* <td>{user.password}</td> */}
                                 <td>
-                                    <button type="button" class="btn btn-primary edit-btn">
-                                        ویرایش
+                                    <button type="button" class="btn btn-primary edit-btn" onClick={() => changeRole(user._id)}>
+                                        تغییر نقش
                                     </button>
                                 </td>
+
                                 <td>
                                     <button type="button" class="btn btn-danger delete-btn" onClick={() => removeHandler(user._id)}>
                                         حذف

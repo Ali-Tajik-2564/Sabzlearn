@@ -1,0 +1,9 @@
+.answered {
+  width: 0.4rem;
+  background-color: #2bce56 !important;
+  border-radius: 30%;
+}
+.not-answered {
+  background-color: #f0932b !important;
+  border-radius: 30%;
+}

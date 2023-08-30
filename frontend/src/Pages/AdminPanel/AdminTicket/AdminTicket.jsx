@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import Table from '../../../Components/AdminPanel/Table/Table';
 import swal from 'sweetalert';
+import "./AdminTicket.css"
 export default function AdminTicket() {
     const [tickets, setTickets] = useState([]);
 
     useEffect(() => {
+        getAllTickets()
+    }, []);
+    function getAllTickets() {
         fetch(`http://localhost:4000/v1/tickets`, {
             headers: {
                 Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))
@@ -16,12 +20,52 @@ export default function AdminTicket() {
                 console.log(data);
                 setTickets(data);
             });
-    }, []);
+    }
     const showTicket = (body) => {
         swal({
             title: body,
             buttons: "ok"
         })
+    }
+    const sendAnswerTicket = (ticketID) => {
+        swal({
+            title: "پاسخ مورد نظر را وارد کنید"
+            , content: "input"
+            , buttons: 'ارسال'
+        })
+            .then(value => {
+                if (value) {
+                    const answerTicketInfo = {
+                        body: value,
+                        ticketID
+                    }
+                    fetch("http://localhost:4000/v1/tickets/answer", {
+                        method: "POST"
+                        , headers: {
+                            "Content-Type": "application/json"
+                            , "Authorization": `Bearer ${JSON.parse(localStorage.getItem("user"))}`
+
+
+                        }
+                        , body: JSON.stringify(answerTicketInfo)
+
+                    })
+                        .then(res => {
+                            res.json()
+                            if (res.ok) {
+                                swal({
+                                    title: "پاسخ با موفقیت ارسال شد"
+                                    , icon: "success"
+                                    , buttons: "خیلی هم عالی"
+                                })
+                                    .then(() => {
+                                        getAllTickets()
+                                    })
+
+                            }
+                        })
+                }
+            })
     }
     return (
         <>
@@ -42,7 +86,7 @@ export default function AdminTicket() {
                     <tbody>
                         {tickets.map((ticket, index) => (
                             <tr key={ticket._id}>
-                                <td>{index + 1}</td>
+                                <td className={ticket.answer === 1 ? "answered" : "not-answered"}>{index + 1}</td>
                                 <td>{ticket.user}</td>
                                 <td>{ticket.title}</td>
                                 <td>{ticket.departmentSubID}</td>
@@ -58,7 +102,7 @@ export default function AdminTicket() {
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary edit-btn">
+                                    <button type="button" class="btn btn-primary edit-btn" onClick={() => sendAnswerTicket(ticket._id)}>
                                         پاسخ
                                     </button>
                                 </td>

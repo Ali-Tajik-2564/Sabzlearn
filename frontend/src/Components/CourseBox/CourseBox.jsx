@@ -56,10 +56,30 @@ export default function CourseBox(props) {
             <i class='fas fa-users course-box__users-icon'></i>
             <span class='course-box__users-text'>{props.registers}</span>
           </div>
-          <span class='course-box__price'>
-            {props.price === 0 ? "رایگان" : props.price}
-          </span>
+          {
+            (props.discount !== 0 && props.price !== 0) ? (<>
+              <div className="course-box__price">
+                <span class='main-price'>
+                  {props.price === 0 ? "رایگان" : props.price}
+                </span>
+                <span className="price-discount">
+                  {
+                    props.price === 0 ? "رایگان" : props.price - (props.price * props.discount) / 100
+                  }
+                </span>
+              </div>
+            </>) : (
+              <span class='course-box__price'>
+                {props.price === 0 ? "رایگان" : props.price}
+              </span>
+            )
+          }
+
         </div>
+        {(props.price !== 0 && props.discount) && (
+          <span class="courses-box__discount">%{props.discount}</span>
+        )}
+
       </div>
 
       <div class='course-box__footer'>

@@ -3,6 +3,7 @@
   height: 100vh;
   position: fixed;
   right: 0;
+  overflow-y: scroll;
 }
 #sidebar .sidebar-header {
   border-bottom: 1px solid rgba(131, 131, 131, 0.63);

@@ -32,6 +32,7 @@ import TicketsInfos from "./Pages/UserPanel/UserTicket/TicketsInfos";
 import TIcketAnswer from "./Pages/UserPanel/UserTicket/TIcketAnswer";
 import EditAccount from "./Pages/UserPanel/EditAccount/EditAccount";
 import AdminTicket from "./Pages/AdminPanel/AdminTicket/AdminTicket";
+import Discount from "./Pages/AdminPanel/Discount/Discount";
 const routes = [
 
   { path: "/", element: <Index /> },
@@ -59,6 +60,7 @@ const routes = [
       { path: "comment", element: <AdminComments /> },
       { path: "off", element: <Offs /> },
       { path: "ticket", element: <AdminTicket /> },
+      { path: "discount", element: <Discount /> },
     ]
   },
   {

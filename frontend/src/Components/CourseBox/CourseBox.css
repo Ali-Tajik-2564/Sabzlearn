@@ -4,6 +4,8 @@
   border-radius: 1rem;
   margin: 2rem 0;
   transition: all 400ms ease;
+  position: relative;
+  z-index: 99999;
 }
 
 .course-box:hover {
@@ -92,4 +94,50 @@
 .course-box__footer-icon {
   margin-right: 0.5rem;
   font-size: 1.9rem;
+}
+
+.courses-box__discount {
+  position: absolute;
+  left: -0.7rem;
+  top: -0.7rem;
+  background-color: #2bce56;
+  padding: 0.3rem 1.3rem;
+  font-size: 1.4rem;
+  color: var(--white-color);
+  border-radius: 0.5rem;
+  transform: rotate(-10deg);
+  transition: all 400ms ease;
+  z-index: 99999;
+}
+.course-box:hover .courses-box__discount {
+  transform: rotate(0deg);
+}
+.courses-box__price-discount {
+  color: #2bce56;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: 1rem;
+}
+.courses-box__undiscount {
+  font-size: 1.4rem;
+  position: relative;
+}
+.courses-box__undiscount::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: rgb(117, 117, 117);
+  right: 0;
+  z-index: 999;
+  top: 1rem;
+}
+.main-price {
+  text-decoration: line-through;
+  color: orange !important;
+}
+.price-discount {
+  font-weight: bold;
+  display: block !important;
+  color: #2bce56 !important;
 }
