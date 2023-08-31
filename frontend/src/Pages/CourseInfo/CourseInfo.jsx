@@ -121,18 +121,19 @@ export default function CourseInfo() {
             swal({
               title: "درصورت وجود کد تخفیف ان را وارد کنید"
               , content: "input"
-              , buttons: ["ثبت نام با کد تخفیف", "ثبت نام با کد تخفیف"]
+              , buttons: ["ثبت نام بدون کد تخفیف", "ثبت نام با کد تخفیف"]
             })
               .then(result => {
                 if (result === null) {
-                  fetch(`http://localhost:4000/v1/courses/${course._id}/register`, {
+                  fetch(`http://localhost:4000/v1/courses/${courseInfo._id}/register`, {
                     method: "POST"
                     , headers: {
                       "Authorization": `Bearer ${LocalStorageToken}`
+                      , "Content-Type": "application/json"
                     }
-                    , "Content-Type": "application/json"
+
                     , body: JSON.stringify({
-                      course: courseInfo._id
+                      price: courseInfo.price
                     })
                   })
                     .then(res => {
@@ -149,7 +150,7 @@ export default function CourseInfo() {
                       }
                     })
                 } else {
-                  fetch(`http://localhost:4000/v1/offs/${code}`, {
+                  fetch(`http://localhost:4000/v1/offs/${result}`, {
                     method: "POST",
                     headers: {
                       "Authorization": `Bearer ${LocalStorageToken}`
@@ -178,12 +179,13 @@ export default function CourseInfo() {
                       }
                     })
                     .then(code => {
-                      fetch(`http://localhost:4000/v1/courses/${course._id}/register`, {
+                      fetch(`http://localhost:4000/v1/courses/${courseInfo._id}/register`, {
                         method: "POST"
                         , headers: {
-                          "Authorization": `Bearer ${LocalStorageToken}`
+                          "Authorization": `Bearer ${LocalStorageToken}`,
+                          "Content-Type": "application/json"
                         }
-                        , "Content-Type": "application/json"
+
                         , body: JSON.stringify({
                           course: courseInfo.price - (courseInfo.price * code.percent / 100)
                         })
@@ -476,8 +478,8 @@ export default function CourseInfo() {
                         دانشجوی دوره هستید
                       </span>
                     ) : (
-                      <span class='course-info__register-title'>
-                        <i class='fas fa-graduation-cap course-info__register-icon' onClick={() => registerToCourse(courseDetail)}></i>
+                      <span class='course-info__register-title' onClick={() => registerToCourse(courseDetail)}>
+                        <i class='fas fa-graduation-cap course-info__register-icon' > </i>
                         ثبت نام کنید
                       </span>
                     )}

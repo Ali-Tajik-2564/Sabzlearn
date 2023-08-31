@@ -132,13 +132,13 @@ export default function Comment({ comments, onSubmit }) {
                 </div> */}
                 <div className="col-12">
                   <select className="form-select form-control font-bold" onChange={event => setScoreComment(event.target.value
-                  )}>امتیاز خود را وارد نمایید</select>
-                  <option value="-1" className="form-control">امتیاز خود را وارد نمایید</option>
-                  <option value="5" className="form-control">عالی</option>
-                  <option value="4" className="form-control">خیلی خوب</option>
-                  <option value="3" className="form-control">خوب</option>
-                  <option value="2" className="form-control">متوسط</option>
-                  <option value="1" className="form-control">ضغیف</option>
+                  )}>امتیاز خود را وارد نمایید
+                    <option value="-1" className="form-control">امتیاز خود را وارد نمایید</option>
+                    <option value="5" className="form-control">عالی</option>
+                    <option value="4" className="form-control">خیلی خوب</option>
+                    <option value="3" className="form-control">خوب</option>
+                    <option value="2" className="form-control">متوسط</option>
+                    <option value="1" className="form-control">ضغیف</option></select>
                 </div>
               </div>
               <div class='comments__respond-content'>

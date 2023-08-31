@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
 import MainHeader from "../../Components/MainHeader/MainHeader";
-import Topbar from "../../Components/Topbar/Topbar";
+import TopBar from "../../Components/TopBar/TopBar";
 import { useForm } from "../../hooks/useForm";
 import ReCAPTCHA from "react-google-recaptcha";
 import {
@@ -79,7 +79,7 @@ export default function Login() {
   };
   return (
     <>
-      <Topbar />
+      <TopBar />
       <MainHeader />
 
       <section class='login-register'>
@@ -138,16 +138,13 @@ export default function Login() {
               ,
             </div>
             <Button
-              className={`login-form__btn ${
-                (formState.isFormValid && isRecapchaValid).prettierignore
-                  ? "login-form__btn-success"
-                  : "login-form__btn-error"
-              }`}
+              className={`login-form__btn ${formState.isFormValid
+                ? "login-form__btn-success"
+                : "login-form__btn-error"
+                }`}
               type='submit'
               onClick={useLogin}
-              disabled={
-                (!formState.isFormValid && !isRecapchaValid).prettierignore
-              }>
+              disabled={!formState.isFormValid}>
               <i class='login-form__btn-icon fas fa-sign-out-alt'></i>
               <span class='login-form__btn-text'>ورود</span>
             </Button>

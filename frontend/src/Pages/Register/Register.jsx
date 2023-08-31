@@ -47,7 +47,7 @@ export default function Register() {
 
   const useRegister = (event) => {
     event.preventDefault();
-    let newUser = {
+    const newUser = {
       username: formState.inputs.username.value,
       email: formState.inputs.email.value,
       password: formState.inputs.password.value,
@@ -55,7 +55,6 @@ export default function Register() {
       name: formState.inputs.name.value,
       phone: formState.inputs.phone.value,
     };
-    console.log(JSON.stringify(newUser));
     fetch("http://localhost:4000/v1/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -64,7 +63,8 @@ export default function Register() {
       .then((res) => {
         if (res.ok) {
 
-          res.json()
+          return res.json()
+
         } else if (res.status === 403) {
           swal({
             title: "این شماره تماس بن شده است",
